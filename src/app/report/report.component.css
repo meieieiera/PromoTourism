@@ -1,0 +1,15 @@
+.chartContainer{
+   width:50%;
+}
+.chartContainer div{
+    margin:2rem 0;
+}
+.chartOuter{
+    margin-top:2rem;
+    display: flex;
+    justify-content: center;
+}
+.merchant{
+    margin:2rem 0;
+    text-align: center;
+}

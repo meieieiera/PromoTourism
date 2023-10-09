@@ -1,0 +1,35 @@
+
+<div *ngIf="selectedRow" class="merchant">
+    <h2>Sales Report for {{ selectedRow.name }} ({{ selectedRow.id }})</h2>
+</div>
+
+<div class="chartOuter">
+<div class="chartContainer">
+  <div>
+  <apx-chart 
+  [series]="chartSeries" 
+  [chart]="chartDetails" 
+  [xaxis]="chartAxis"
+  [yaxis]="chartYaxis"
+  [dataLabels]="chartLabels"
+  [title]="chartTitle"
+  [yaxis]="chartYaxis"
+  [legend]="chartLegend"
+  >
+</apx-chart>
+</div>
+<div>
+<apx-chart 
+  [series]="yearSeries" 
+  [chart]="chartDetails" 
+  [xaxis]="yearAxis"
+  [yaxis]="chartYaxis"
+  [dataLabels]="chartLabels"
+  [title]="yearTitle"
+  [yaxis]="chartYaxis"
+  [legend]="chartLegend"
+  >
+</apx-chart></div>
+</div>
+</div>
+  

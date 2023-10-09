@@ -1,0 +1,113 @@
+<h2>Pending Approval</h2>
+
+<div class="accordion">
+<mat-accordion>
+    <mat-expansion-panel hideToggle>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          M0001
+        </mat-panel-title>
+        <mat-panel-description>
+          ABC Industries
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <mat-divider></mat-divider>
+
+      <div class="flex-container-col">
+        <div class="flex-container">
+          <div class="left">Contact Number</div>
+          <div>+6012-3456789</div>
+          </div>
+          <div class="flex-container">
+            <div class="left">Email</div>
+            <div>customer@abcindustries.com</div>
+          </div>
+          
+          <div class="flex-container">
+          <div class="left">Description</div>
+          <div>We are abc industies leading in sales of package trips to Thailand and Singapore</div>
+        </div>
+      </div>
+
+      <div class="b">
+        <b>Documents</b>
+      </div>
+
+      <mat-card>
+        <mat-card-subtitle>Company Registration Certificate</mat-card-subtitle>
+          <mat-card-content>Description</mat-card-content>
+          <mat-card-actions align="end">
+            <button mat-flat-button class="download"><a href="./1630-3331-1-PB.pdf" download>Download</a></button>
+          </mat-card-actions>
+
+          <mat-divider></mat-divider>
+
+          <mat-card-subtitle>Company Operational Status</mat-card-subtitle>
+          <mat-card-content>Description</mat-card-content>
+          <mat-card-actions align="end">
+            <button mat-flat-button class="download">Download</button>
+          </mat-card-actions>
+          
+      </mat-card>
+
+      <mat-action-row>
+        <button mat-button mat-flat-button color="basic">Approve</button>
+        <button mat-button mat-flat-button color="warn">Reject</button>
+      </mat-action-row>
+
+    </mat-expansion-panel>
+
+    <!--Second exapnsion panel-->
+
+    <mat-expansion-panel hideToggle>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          M0002
+        </mat-panel-title>
+        <mat-panel-description>
+          DEF Industries
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <mat-divider></mat-divider>
+
+      <div class="flex-container-col">
+        <div class="flex-container">
+          <div class="left">Contact Number</div>
+          <div>+6076-75433345</div>
+          </div>
+          <div class="flex-container">
+            <div class="left">Email</div>
+            <div>customer@defindustries.com</div>
+          </div>
+          
+          <div class="flex-container">
+          <div class="left">Description</div>
+          <div>We are def industies leading in sales of package trips in South East Asia</div>
+        </div>
+      </div>
+
+      <div class="b">
+        <b>Documents</b>
+      </div>
+
+      <mat-card>
+        <mat-card-subtitle>Company Registration Certificate</mat-card-subtitle>
+          <mat-card-content>Description</mat-card-content>
+          <mat-card-actions align="end">
+            <button mat-flat-button class="download"><a href="./1630-3331-1-PB.pdf" download>Download</a></button>
+          </mat-card-actions>
+      </mat-card>
+
+      <mat-action-row>
+        <button mat-button mat-flat-button color="basic" mat-button (click)="openDialog()">Approve</button>
+        <button mat-button mat-flat-button color="warn" mat-button (click)="openDialog()">Reject</button>
+      </mat-action-row>
+
+    </mat-expansion-panel>
+
+  </mat-accordion>
+</div>
+
+  
+  
+  

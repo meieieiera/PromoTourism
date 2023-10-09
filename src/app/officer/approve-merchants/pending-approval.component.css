@@ -1,0 +1,73 @@
+mat-card-subtitle {
+    padding: 10px 0px 10px 10px;
+    font-weight: bold;
+}
+
+mat-panel-title{
+    font-weight: bold;
+}
+
+mat-card-content {
+    padding-top: 5px;
+    padding-bottom: 15px;
+    padding-left: 40px;
+    padding-right: 40px;
+
+}
+
+.download {
+background-color: rgb(251,211,68);
+text-decoration: none;}
+
+table {
+    width: 100%;
+    
+  }
+
+.flex-container-col{
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+}
+
+
+.flex-container{
+    display: flex;
+    padding-top: 10px;
+    
+}
+.left {
+    justify-content: left;
+    width: 20%;
+    font-weight: bold;
+    padding-right: 10px;
+
+}
+
+.right{
+    width: 80%;
+    
+}
+
+mat-grid-tile{
+    height: 30px;
+}
+
+.b {
+    padding-top: 10px;
+    padding-bottom: 5px;
+}
+
+.accordion{
+    margin-top: 2rem;
+    width:80%;
+    margin:auto;
+    padding-top: 10px;
+}
+h2{
+    text-align: center;
+}
+
+mat-dialog-content{
+    padding-top: 20px;
+}

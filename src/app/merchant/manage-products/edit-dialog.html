@@ -1,0 +1,116 @@
+<!--<h1 mat-dialog-title>Edit Product</h1>
+<div mat-dialog-content>
+  <form #editProduct="ngForm">
+    <div>
+      <mat-form-field>
+        <mat-label>Product Name: </mat-label>
+        <input placeholder="Bako National Park with Sea Stack Formation Day Tour in Kuching" required ngModel type="text" name="name" #name="ngModel">
+      </mat-form-field>
+    </div>
+    
+    <div>
+      <mat-form-field>
+        <mat-label>Quantity</mat-label>
+        <input placeholder="2000" matInput required ngModel type="number" name="quantity" #quantity="ngModel">
+      </mat-form-field>
+    </div>
+          
+    <div>
+      <mat-form-field floatLabel="always">
+        <mat-label>Amount</mat-label>
+        <input matInput required type="number" class="example-right-align" placeholder="310">
+        <span matTextPrefix>$&nbsp;</span>
+        <span matTextSuffix>.00</span>
+      </mat-form-field>
+    </div>
+          
+    <div>
+      <mat-form-field class="">
+        <mat-label>Product Description</mat-label>
+        <textarea matInput placeholder="Embark on an immersive day tour into the wilderness of Sarawak’s oldest and most renowned national park!
+        Wander around Bako National Park’s sun-dappled trails and observe its resident stars, the proboscis monkeys
+        Traverse a verdant forest to discover jungle streams, sweeping coastlines, secret coves, and spot rare wildlife
+        Marvel at the park’s famous sea stacks, which are outcrops near the shore, and take snapshots of them" required type="text" ngModel name="description" #description="ngModel"></textarea>
+      </mat-form-field>
+    </div>
+        
+    <div>
+      <input mat-input type="file" id="uploadDoc" (change)="onFileSelected($event)" accept=".pdf, .jpg, .png" />
+      </div>
+      
+      <br>
+      <mat-divider></mat-divider>
+      <br>
+
+  <div mat-dialog-actions>
+    <button mat-dialog-close=""
+    mat-flat-button 
+    color="accent"
+    type="submit">Add New</button>
+  
+  <button mat-dialog-close mat-flat-button id="close">Close</button>
+  </div>
+  
+  </form>
+  </div>!-->
+
+  <h1 mat-dialog-title>Edit Product</h1>
+<div mat-dialog-content>
+  <form #addNewProduct="ngForm">
+    <div>
+      <mat-form-field>
+        <mat-label>Product Name: </mat-label>
+        <input matInput placeholder="Bako National Park with Sea Stack Formation Day Tour in Kuching" ngModel ngModel type="text" name="name" #name="ngModel">
+      </mat-form-field>
+    </div>
+    
+    <div>
+      <mat-form-field>
+        <mat-label>Quantity</mat-label>
+        <input matInput ngModel placeholder="2000" type="number" name="quantity" #quantity="ngModel">
+      </mat-form-field>
+    </div>
+          
+    <div>
+      <mat-form-field floatLabel="always">
+        <mat-label>Amount</mat-label>
+        <input matInput type="number" class="example-right-align" placeholder="0">
+        <span matTextPrefix>$&nbsp;</span>
+        <span matTextSuffix>.00</span>
+      </mat-form-field>
+    </div>
+          
+    <div>
+      <mat-form-field class="">
+        <mat-label>Product Description</mat-label>
+        <textarea matInput placeholder="Embark on an immersive day tour into the wilderness of Sarawak’s oldest and most renowned national park!
+        Wander around Bako National Park’s sun-dappled trails and observe its resident stars, the proboscis monkeys
+        Traverse a verdant forest to discover jungle streams, sweeping coastlines, secret coves, and spot rare wildlife
+        Marvel at the park’s famous sea stacks, which are outcrops near the shore, and take snapshots of them" type="text" ngModel name="description" #description="ngModel"></textarea>
+      </mat-form-field>
+    </div>
+        
+    <div>
+        <label>New Image</label>
+        <br>
+      <input mat-input type="file" id="uploadDoc" (change)="onFileSelected($event)" accept=".pdf, .jpg, .png" />
+      </div>
+      
+      <br>
+      <mat-divider></mat-divider>
+      <br>
+
+  <div mat-dialog-actions>
+    <button mat-dialog-close=""
+    mat-flat-button 
+    color="accent"
+    type="submit">Edit</button>
+  
+  <button mat-dialog-close mat-flat-button id="close">Close</button>
+  </div>
+  
+  </form>
+  </div>
+
+  
+

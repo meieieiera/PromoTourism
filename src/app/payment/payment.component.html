@@ -1,0 +1,118 @@
+<div class="center-align">
+<div class="container">
+    <mat-card class="outer-card">
+        <div class="title-price">
+            <h2>Complete payment</h2>
+            <span class="price">
+                RM {{tour.price}}
+            </span>
+        </div>
+        <mat-radio-group aria-labelledby="payemnt-option" class="radio-group">
+            <mat-radio-button class="radio-button" value="online-banking">
+                <mat-accordion>
+                    <mat-expansion-panel>
+                        <mat-expansion-panel-header>Online banking</mat-expansion-panel-header>
+                        <button mat-button>
+                            <div class="logo-name">
+                                <img src="../../assets/images/banks/hlb.png">
+                                <span>Hong Leong Bank</span>
+                            </div>
+                        </button>
+                        <button mat-button>
+                            <div class="logo-name">
+                            <img src="../../assets/images/banks/cimb.png">
+                            <span>Cimb Bank</span></div>
+                        </button>
+                        <button mat-button><div class="logo-name">
+                            <img src="../../assets/images/banks/hsbc.png">
+                            <span>HSBC Bank</span></div>
+                        </button>
+                        <button mat-button><div class="logo-name">
+                            <img src="../../assets/images/banks/maybank.jpg">
+                            <span>Maybank Bank</span></div>
+                        </button>
+                        <button mat-button><div class="logo-name">
+                            <img src="../../assets/images/banks/publicBanl.png">
+                            <span>Public Bank</span></div>
+                        </button>
+                        <button mat-button><div class="logo-name">
+                            <img src="../../assets/images/banks/rhb.png">
+                            <span>RHB Bank</span></div>
+                        </button>
+                    </mat-expansion-panel>
+                    
+                </mat-accordion>
+            </mat-radio-button>
+            <mat-radio-button class="radio-button" value="credit-debit">
+                <mat-accordion>
+                    <mat-expansion-panel>
+                        <mat-expansion-panel-header>Credit/Debit card</mat-expansion-panel-header>
+                        <mat-card>
+                            <form (submit)="onPayment(cardForm)" #cardForm="ngForm">
+                            <mat-card-content>
+                                <h6>Enter card details</h6>
+                                <mat-form-field class="input-field">
+                                    <mat-label>Card number</mat-label>
+                                    <input 
+                                    matInput 
+                                    type="text" 
+                                    name="cnumber" 
+                                    ngModel 
+                                    required 
+                                    #cnumber="ngModel">
+                                    <mat-error *ngIf="cnumber.invalid">Please enter card number</mat-error>
+                                </mat-form-field>
+                                <mat-form-field class="input-field">
+                                    <mat-label>Expiration date</mat-label>
+                                    <input 
+                                    matInput 
+                                    type="text" 
+                                    name="edate" 
+                                    ngModel
+                                    required 
+                                    #edate="ngModel">
+                                    <mat-error *ngIf="edate.invalid">Please enter expiration date</mat-error>
+                                </mat-form-field>
+                                <mat-form-field class="input-field">
+                                    <mat-label>Security code</mat-label>
+                                    <input 
+                                    matInput 
+                                    type="text" 
+                                    name="scode" 
+                                    ngModel
+                                    required 
+                                    #scode="ngModel">
+                                    <mat-error *ngIf="scode.invalid">Please enter security code</mat-error>
+                                </mat-form-field>
+                                <mat-card-footer>
+                                    <div class="button">
+                                        <button mat-raised-button color="accent" type="submit">Pay</button>
+                                    </div>
+                                </mat-card-footer>
+                            </mat-card-content>
+                        </form>
+                        </mat-card>
+                    </mat-expansion-panel>
+                </mat-accordion>
+            </mat-radio-button>
+            <mat-radio-button class="radio-button" value="tng">
+                <mat-accordion>
+                    <mat-expansion-panel>
+
+                        <mat-expansion-panel-header>E-Wallet</mat-expansion-panel-header>
+
+                        <button mat-button><div class="logo-name">
+                            <img src="../../assets/images/banks/tng.png">
+                            <span>TNG eWallet</span></div>
+                        </button>
+                        <button mat-button><div class="logo-name">
+                            <img src="../../assets/images/banks/mae.png">
+                            <span>MAE eWallet</span></div>
+                        </button>
+                    </mat-expansion-panel>
+                </mat-accordion>
+            </mat-radio-button>
+        </mat-radio-group>
+</mat-card>
+</div>
+</div>

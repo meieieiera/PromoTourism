@@ -1,0 +1,31 @@
+<div class="container">
+
+<ul>
+    <li *ngFor="let tour of tours">
+        <a>
+            <mat-card>
+                <img src="{{tour.imageUrl}}" alt="">
+                <div class="content">
+                    <div class="tour-name">
+                        {{tour.name}}
+                    </div>
+                    <div class="tour-date">
+                        {{tour.date}}
+                    </div>
+                    <div class="tour-pax">
+                        {{tour.pax}}
+                    </div>
+                    <div class="price-review-group">
+                        <div class="price">
+                            <span>
+                                RM {{tour.price}}
+                            </span>
+                        </div>
+                        <button color="accent" mat-raised-button routerLink="/review/{{tour.id}}">Review</button>
+                    </div>
+                </div>
+        </mat-card>
+        </a>
+    </li>
+</ul>
+</div>

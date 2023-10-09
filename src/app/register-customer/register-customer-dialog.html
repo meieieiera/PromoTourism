@@ -1,0 +1,63 @@
+<h2 mat-dialog-title>Customer Registration</h2>
+<div mat-dialog-content>
+<div>
+  <!--(submit)="onAddMerchant(merchantReg)"-->
+<form #customerReg="ngForm">
+  <div>
+    <mat-form-field>
+      <mat-label>Full Name: </mat-label>
+      <input matInput required ngModel type="text" name="name" #name="ngModel">
+    </mat-form-field>
+  </div>
+  <div>
+        <mat-form-field>
+          <mat-label>Contact Number</mat-label>
+          <span matPrefix>+60 &nbsp;</span>
+          <input type="tel" matInput placeholder="555-555-1234" required ngModel name="contactNum" #contactNum="ngModel">
+        </mat-form-field>
+      </div>
+  
+      <div class="">
+        <mat-form-field class="example-full-width">
+          <mat-label>Email</mat-label>
+          <input type="email" matInput [formControl]="emailFormControl" placeholder="Ex. pat@example.com" ngModel name="email">
+          <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
+            Please enter a valid email address
+          </mat-error>
+          <mat-error *ngIf="emailFormControl.hasError('required')">
+            Email is <strong>required</strong>
+          </mat-error>
+        </mat-form-field>
+        </div>
+  
+
+        <div class="example-container">
+            <mat-form-field>
+              <mat-label>Enter your password</mat-label>
+              <input matInput required [type]="hide ? 'password' : 'text'">
+              <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+              </button>
+            </mat-form-field>
+            </div>
+
+    <mat-divider></mat-divider>
+<div id="btnCollection">
+  <button mat-dialog-close=""
+  mat-flat-button 
+  color="accent"
+  type="submit">Submit</button>
+
+
+<button mat-dialog-close mat-flat-button id="close">Close</button>
+</div>
+
+
+    </form>
+</div>
+</div>
+
+
+  
+
+  

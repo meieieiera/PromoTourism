@@ -1,0 +1,94 @@
+<div class="center-align">
+    <div class="container">
+        <img [src]="tour.imageUrl" [alt]="tour.name"/>
+        <div class="details">
+            <div class="header">
+                <span class="name">
+                    {{tour.name}}
+                </span>
+            </div>
+            <div class="rating">
+                <star-rating
+                [stars]="tour.stars"></star-rating>
+            </div>
+            <div class="date">
+                <span >
+                    {{tour.date}}
+                </span>
+            </div>
+            <div class="pax">
+                <span >
+                    {{tour.pax}}
+                </span>
+            </div>
+            <div class="price">
+                <span>
+                    RM {{tour.price}}
+                </span>
+            </div>
+        </div>
+    </div>
+    
+</div>
+<h2>Enter purchase details</h2>
+<div class="container2">
+    <mat-card>
+        <form (submit)="toPayment(detailForm)" #detailForm="ngForm">
+        <mat-card-content>
+            <mat-form-field class="mat-50">
+                <mat-label>First name</mat-label>
+                <input 
+                matInput 
+                type="text" 
+                name="fname" 
+                ngModel 
+                required 
+                #fname="ngModel">
+                <mat-error *ngIf="fname.invalid">Please enter first name</mat-error>
+            </mat-form-field>
+            <mat-form-field class="mat-50">
+                <mat-label>Last name</mat-label>
+                <input 
+                matInput 
+                type="text" 
+                name="lname" 
+                ngModel
+                required 
+                #lname="ngModel">
+                <mat-error *ngIf="fname.invalid">Please enter last name</mat-error>
+            </mat-form-field>
+            <mat-form-field class="mat-50">
+                <mat-label>Phone</mat-label>
+                <span matPrefix>+60 &nbsp;</span>
+                <input 
+                matInput 
+                type="tel" 
+                name="phone" 
+                ngModel
+                required 
+                #phone="ngModel"
+                placeholder="555-555-1234">
+                <mat-error *ngIf="fname.invalid">Please enter phone number</mat-error>
+            </mat-form-field>
+            <mat-form-field class="mat-50">
+                <mat-label>Email</mat-label>
+                <input 
+                matInput 
+                type="email" 
+                name="email" 
+                ngModel
+                required 
+                #email="ngModel"
+                email>
+                <mat-error *ngIf="fname.invalid">Please enter email</mat-error>
+            </mat-form-field>
+        </mat-card-content>
+        <mat-card-footer>
+            <div class="button">
+                <button mat-raised-button color="accent" type="submit">Go to payment</button>
+            </div>
+        </mat-card-footer>
+    </form>
+    </mat-card>
+    
+</div>

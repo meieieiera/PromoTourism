@@ -1,0 +1,46 @@
+mat-form-field{
+    width:100%;
+}
+
+.mdc-dialog__content {
+    width: 400px;
+}
+
+#addDocBtn{
+    background-color: rgb(251,211,68);
+
+}
+
+mat-divider{
+    padding-bottom: 10px;
+}
+
+#btnCollection{
+    display: flex;
+    justify-content: flex-end;
+
+}
+
+#close{
+    background-color: black;
+    color: white;
+    margin-left: 5px;
+}
+
+#uploadDoc{
+    margin-right: 5px;
+    padding-bottom: 10px;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+#uploadDocTitle{
+    font-size: 17px;
+    font-weight:400;
+    padding-left: 24px;
+    margin-bottom: 15px;
+    padding-right: 24px;
+}
+
+#noPost{
+    padding-top: 10px;
+}

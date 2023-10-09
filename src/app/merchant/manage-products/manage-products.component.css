@@ -1,0 +1,33 @@
+#tourPacBtn {
+    margin-bottom: 15px;
+    display: flex;
+    justify-content: center;
+    }
+
+td {
+    padding-top: 10px;
+    padding: 10px;
+}
+
+mat-form-field {
+    width: 100%;
+}
+
+#uploadDoc{
+    margin-right: 5px;
+    padding-bottom: 10px;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+.mdc-dialog__content {
+    width: 400px;
+}
+
+.container{
+    margin-top: 2rem;
+    width:80%;
+    margin:auto;
+}
+h2{
+    text-align:center;
+}

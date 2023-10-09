@@ -1,0 +1,59 @@
+<div class="center-align">
+    <div class="container">
+        <img [src]="tour.imageUrl" [alt]="tour.name"/>
+        <div class="details">
+            <div class="header">
+                <span class="name">
+                    {{tour.name}}
+                </span>
+            </div>
+            <div class="date">
+                <span >
+                    {{tour.date}}
+                </span>
+            </div>
+            <div class="pax">
+                <span >
+                    {{tour.pax}}
+                </span>
+            </div>
+            <div class="price">
+                <span>
+                    RM {{tour.price}}
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="justify-center">
+<div class="rating-container">
+   
+        <div class="rating-content">
+            <div class="rate-star">
+                <h4>Rate your experience</h4>
+                <ngb-rating [max]="5"></ngb-rating>
+            </div>
+            <div class="comment">
+                <form (submit)="onSubmitPost(rateForm)" #rateForm="ngForm">
+                    <mat-form-field>
+                        <mat-label>Leave a comment</mat-label>
+                        <textarea 
+                        matInput 
+                        placeholder="Ex. The tour was very..."
+                        name="comment" 
+                        ngModel 
+                        required 
+                        #comment="ngModel">
+                <mat-error *ngIf="comment.invalid">Please enter comment</mat-error></textarea>
+                    </mat-form-field>
+                    <mat-card-footer>
+                        <div class="button">
+                            <button mat-raised-button color="accent" type="submit">Save</button>
+                        </div>
+                    </mat-card-footer>
+                </form>
+        </div>
+    </div>
+</div>
+</div>
+

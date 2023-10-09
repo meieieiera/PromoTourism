@@ -1,0 +1,28 @@
+<div  class="center-align">
+<div class="container">
+    <h2>Log in</h2>
+    <form #loginForm="ngForm" (submit)="loginAction(loginForm)">
+        <mat-form-field class="example-full-width">
+            <mat-label>Username</mat-label>
+            <input 
+            matInput 
+            type="text"
+            placeholder="Enter username"
+            name="username"
+            ngModel >
+        </mat-form-field>
+        <mat-form-field class="example-full-width">
+            <mat-label>Password</mat-label>
+            <input 
+            matInput 
+            type="password"
+            placeholder="Enter password"
+            name="password"
+            ngModel>
+        </mat-form-field>
+        <button type="submit" mat-raised-button color="accent">Login</button>
+    </form>
+    <br>
+    <button routerLink="registerCus" (click)="openDialog()" mat-raised-button color="primary">Register as customer</button>
+</div>
+</div>

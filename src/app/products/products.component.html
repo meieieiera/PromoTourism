@@ -1,0 +1,23 @@
+<ul>
+    <li *ngFor="let tour of tours">
+        <a>
+            <img src="{{tour.imageUrl}}" alt="">
+            <div class="content">
+                <div class="tour-name">
+                    {{tour.name}}
+                </div>
+                <div class="stars">
+                    <star-rating [stars]="tour.stars"/>
+                </div>
+                <div class="price-detail-group">
+                    <div class="price">
+                        <span>
+                            RM {{tour.price}}
+                        </span>
+                    </div>
+                    <button mat-raised-button (click)="toPurchase(tour.id)">Details</button>
+                </div>
+            </div>
+        </a>
+    </li>
+</ul>

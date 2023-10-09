@@ -1,0 +1,41 @@
+<h2 mat-dialog-title>Merchant Registration</h2>
+<div  mat-dialog-content>
+    <p>Please upload all supporting documents</p>
+    <form (submit)="onAddDoc(uploadDoc)" #uploadDoc="ngForm">
+  <mat-form-field>
+    <mat-label>Document Name: </mat-label>
+    <input matInput required ngModel type="text" name="name" #name="ngModel">
+  </mat-form-field>
+  
+
+  <div>
+    <mat-form-field class="">
+      <mat-label>Description</mat-label>
+      <textarea matInput ngModel name="description" #description="ngModel"></textarea>
+    </mat-form-field>
+  </div>
+
+<div>
+  <input mat-input type="file" id="uploadDoc" (change)="onFileSelected($event)" accept=".pdf, .jpg, .png" />
+
+  </div>
+  
+
+  <button 
+  mat-flat-button 
+  color="accent" 
+  type="submit">Add Document</button>
+
+  </form>
+
+</div>
+<doc-list></doc-list>
+<div>
+    
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="openDialog()" mat-dialog-close>Done</button>
+</div>
+  
+
+  

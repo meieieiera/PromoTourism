@@ -1,0 +1,13 @@
+<div id="uploadDocTitle">Uploaded Documents<div>
+
+<mat-accordion multi="true" *ngIf="documents.length>0">
+    <mat-expansion-panel *ngFor="let doc of documents">
+        <mat-expansion-panel-header>
+            {{doc.name}}
+        </mat-expansion-panel-header>
+        <p>{{doc.description}}</p>
+        <button mat-button color="warn">DELETE</button>
+    </mat-expansion-panel>
+</mat-accordion>
+
+<p id="noPost" *ngIf="documents.length==0">No documents added yet</p>

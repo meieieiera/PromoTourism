@@ -19,7 +19,6 @@ import { FormsModule } from '@angular/forms';
 import { PaymentComponent } from './payment/payment.component';
 import { ReviewListComponent } from './review-list/review-list.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { RatingComponent } from './rating/rating.component';
 import { MerchantListComponent } from './merchant-list/merchant-list.component';
 import { ReportComponent } from './report/report.component';
 import { NgApexchartsModule } from "ng-apexcharts";
@@ -40,7 +39,6 @@ import { RegisterCustomerDialog } from './register-customer/register-customer.co
     PurchaseComponent,
     PaymentComponent,
     ReviewListComponent,
-    RatingComponent,
     MerchantListComponent,
     ReportComponent
     

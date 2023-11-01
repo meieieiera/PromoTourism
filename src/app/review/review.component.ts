@@ -1,11 +1,13 @@
 import { Component, OnInit, EventEmitter, Output} from '@angular/core';
-import { Tour } from '../shared/models/Tour';
+import { Tour } from '../shared/models/Tour.model';
 import { TourService } from '../services/tour/tour.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { detail } from '../shared/models/detail';
 import { NgForm } from '@angular/forms';
 import {MatDialog, MatDialogRef, MatDialogModule} from '@angular/material/dialog';
 import {MatButtonModule} from '@angular/material/button';
+import { reviewTour } from '../shared/models/reviewTour.model';
+import { Subscription } from 'rxjs';
 @Component({
   selector: 'app-review',
   templateUrl: './review.component.html',
@@ -13,12 +15,13 @@ import {MatButtonModule} from '@angular/material/button';
 })
 export class ReviewComponent implements OnInit {
   @Output() detailCreated = new EventEmitter<detail>();
-  tour!:Tour;
+  private reviewTourSub: Subscription|undefined;
+  rtour!:reviewTour;
   constructor(private activatedRoute:ActivatedRoute,
     private tourService: TourService, private router:Router,public dialog: MatDialog){
     activatedRoute.params.subscribe((params)=>{
       if(params['id'])
-      this.tour=tourService.getTourById(params['id']);
+      this.rtour=tourService.getReviewTourById(params['id']);
     })
      
   }
@@ -29,14 +32,15 @@ export class ReviewComponent implements OnInit {
       exitAnimationDuration,
     });
   }
-  onSubmitPost(form:NgForm){
+  onSubmitReview(form:NgForm){
     if(form.invalid){
       return;
     }
     this.openDialog('0ms', '0ms')
+    this.tourService.removeReviewTour(this.rtour.id)
   }
   ngOnInit():void{
-
+    
   }
 }
 @Component({

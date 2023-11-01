@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Tour } from '../shared/models/Tour';
+import { Tour } from '../shared/models/Tour.model';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TourService } from '../services/tour/tour.service';
 import {MatDialog, MatDialogRef, MatDialogModule} from '@angular/material/dialog';
@@ -34,6 +34,8 @@ export class PaymentComponent implements OnInit{
       return;
     }
     this.openDialog('0ms', '0ms')
+    this.tourService.addReviewTour(this.tour.id,this.tour.name,this.tour.price,this.tour.imageUrl,this.tour.date,this.tour.pax);
+
   }
 
   ngOnInit():void{}

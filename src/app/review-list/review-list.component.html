@@ -1,27 +1,27 @@
 <div class="container">
 
 <ul>
-    <li *ngFor="let tour of tours">
+    <li *ngFor="let rtour of rtours">
         <a>
             <mat-card>
-                <img src="{{tour.imageUrl}}" alt="">
+                <img src="{{rtour.imageUrl}}" alt="">
                 <div class="content">
                     <div class="tour-name">
-                        {{tour.name}}
+                        {{rtour.name}}
                     </div>
                     <div class="tour-date">
-                        {{tour.date}}
+                        {{rtour.date}}
                     </div>
                     <div class="tour-pax">
-                        {{tour.pax}}
+                        {{rtour.pax}}
                     </div>
                     <div class="price-review-group">
                         <div class="price">
                             <span>
-                                RM {{tour.price}}
+                                RM {{rtour.price}}
                             </span>
                         </div>
-                        <button color="accent" mat-raised-button routerLink="/review/{{tour.id}}">Review</button>
+                        <button color="accent" mat-raised-button routerLink="/review/{{rtour.id}}">Review</button>
                     </div>
                 </div>
         </mat-card>

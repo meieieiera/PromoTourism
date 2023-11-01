@@ -1,5 +1,5 @@
 import { Component,OnInit,EventEmitter,Output  } from '@angular/core';
-import { Tour } from '../shared/models/Tour';
+import { Tour } from '../shared/models/Tour.model';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TourService } from '../services/tour/tour.service';
 import { NgForm } from '@angular/forms';

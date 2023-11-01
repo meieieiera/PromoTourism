@@ -1,126 +1,99 @@
 import { Injectable } from '@angular/core';
-import{Tour} from '../../shared/models/Tour'
+import{Tour} from '../../shared/models/Tour.model';
+import{HttpClient}from '@angular/common/http';
+import{map}from 'rxjs/operators';
+import { Subject } from 'rxjs';
+import { reviewTour } from 'src/app/shared/models/reviewTour.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TourService {
+  private tours:Tour[]=[];
+  private rTours:reviewTour[]=[];
+  private toursUpdated = new Subject<Tour[]>();
+  private rToursUpdated = new Subject<reviewTour[]>();
+  router: any;
 
-  constructor() { }
+  constructor(private http:HttpClient) { }
+  
   getTourById(id:number): Tour{
-    return this.getAll().find(tour=>tour.id == id)!;
+    return this.tours.find(tour=>tour.id == id)!;
+  }
+  getReviewTourById(id:number): reviewTour{
+    return this.rTours.find(rtour=>rtour.id == id)!;
+  }
+  getAll(){
+    this.http.get<{message:string,tours:any}>('http://localhost:3000/api/tours')
+        .pipe(map((tourData)=>{
+            return tourData.tours.map(tour=>{
+                return{
+                    id:tour.id,
+                    name:tour.name,
+                    price:tour.price,
+                    stars:tour.stars,
+                    imageUrl:tour.imageUrl,
+                    date:tour.date,
+                    pax:tour.pax,
+                    _id:tour._id
+                };
+            });
+        }))
+        .subscribe((transformedPosts)=>{
+            this.tours=transformedPosts;
+            this.toursUpdated.next([...this.tours]);
+        })
+    }
+  getToursUpdateListener(){
+      return this.toursUpdated.asObservable();
+    }
+  addReviewTour(id:number,name:string,price:number,imageUrl:string,date:string,pax:number){
+      const rtour:reviewTour={id:id,name:name,price:price,imageUrl:imageUrl,date:date,pax:pax};
+      this.http
+      .post<{message:string, tourId:number}>('http://localhost:3000/api/rtours',rtour)
+      .subscribe((responseData)=>{
+          console.log(responseData.message);
+          const id=responseData.tourId;
+          // rtour.id=id;
+          // this.tours.push(rtour);
+          // this.toursUpdated.next([...this.tours]);
+          // this.router.navigate(['/']);
+      });  
+  }
+  getReviewTours(){
+    this.http.get<{message:string,reviewTours:any}>('http://localhost:3000/api/rtours')
+        .pipe(map((rTourData)=>{
+            return rTourData.reviewTours.map(rtour=>{
+                return{
+                    id:rtour.id,
+                    name:rtour.name,
+                    price:rtour.price,
+                    // stars:rtour.stars,
+                    imageUrl:rtour.imageUrl,
+                    date:rtour.date,
+                    pax:rtour.pax,
+                    _id:rtour._id
+                };
+            });
+        }))
+        .subscribe((transformedRTour)=>{
+            this.rTours=transformedRTour;
+            this.rToursUpdated.next([...this.rTours]);
+        })
+  }
+  getReviewToursUpdateListener(){
+    return this.rToursUpdated.asObservable();
+  }
+  removeReviewTour(rTourId:number){
+    // this.http.delete<{message:string}>('http://localhost:3000/api/rtour/'+rTourId)
+    // .subscribe(()=>{
+    //     const updatedRTours = this.rTours.filter(rTour=>rTour.id!==rTourId);
+    //     this.rTours=updatedRTours;
+    //     this.rToursUpdated.next([...this.rTours]);
+    // });
+    
+}
+
   }
 
-  getAll():Tour[]{
-    return [
-      {
-        id:1,
-        name: 'Bako National Park with Sea Stack Formation Day Tour in Kuching',
-        price: 310,
-        stars: 4,
-        imageUrl:'/assets/images/tours/bakoPark.png',
-        date: '1 OCT 2023',
-        pax: 3
-      },
-      {
-        id:2,
-        name: 'Kuala Lumpur Suburbs and Batu Caves Tour',
-        price: 40,
-        stars: 4.5,
-        imageUrl:'/assets/images/tours/batucaves.png',
-        date: '28 SEPT 2023',
-        pax: 2
-      },
-      {
-        id:3,
-        name: 'Cameron Highlands Day Tour',
-        price: 340,
-        stars: 5,
-        imageUrl:'/assets/images/tours/cameran.png',
-        date: '25 SEPT 2023',
-        pax: 4
-      },
-      {
-        id:4,
-        name: 'Genting Highlands and Batu Caves Day Tour',
-        price: 130,
-        stars: 4.5,
-        imageUrl:'/assets/images/tours/genting.png',
-        date: '20 AUG 2023',
-        pax: 2
-      },
-      {
-        id:5,
-        name: 'Colmar Bukit Tinggi and Japanese Village Day Tour from Kuala Lumpur',
-        price: 196,
-        stars: 4,
-        imageUrl:'/assets/images/tours/japaneseVillage.png',
-        date: '15 AUG 2023',
-        pax: 1
-      },
-      {
-        id:6,
-        name: 'Mount Kinabalu Climb Via Ferrata Package',
-        price: 2720,
-        stars: 4,
-        imageUrl:'/assets/images/tours/kinabalu.png',
-        date: '18 JULY 2023',
-        pax: 3
-      },
-      {
-        id:7,
-        name: 'Kuala Selangor Full Day Tour from Kuala Lumpur',
-        price: 192.80,
-        stars: 3.5,
-        imageUrl:'/assets/images/tours/kualaSelangor.png',
-        date: '5 JUNE 2023',
-        pax: 2
-      },
-      {
-        id:8,
-        name: 'Langkawi Island Hopping Shared Speedboat Tour',
-        price: 40,
-        stars: 4.5,
-        imageUrl:'/assets/images/tours/langkawi.png',
-        date: '28 MAY 2023',
-        pax: 1
-      },
-      {
-        id:9,
-        name: 'Mari Mari Cultural Village Half Day Tour',
-        price: 100,
-        stars: 5,
-        imageUrl:'/assets/images/tours/mari.png',
-        date: '10 MAY 2023',
-        pax: 2
-      },
-      {
-        id:10,
-        name: 'Historical Melaka Tour with Lunch from Kuala Lumpur',
-        price: 145,
-        stars: 3,
-        imageUrl:'/assets/images/tours/melaka.png',
-        date: '14 APRIL 2023',
-        pax: 5
-      },
-      {
-        id:11,
-        name: 'KL City of Lights Tour with Hop-on Hop-off Bus',
-        price: 35,
-        stars: 3.5,
-        imageUrl:'/assets/images/tours/sunsetKL.png',
-        date: '3 APRIL 2023',
-        pax: 1
-      },
-      {
-        id:12,
-        name: 'Tanjung Rhu Mangrove Tour with Lunch and Transfers in Langkawi',
-        price: 100,
-        stars: 4.5,
-        imageUrl:'/assets/images/tours/tanjungRhu.png',
-        date: '21 MAR 2023',
-        pax: 2
-      },
-    ]
-  }
-}
+  

@@ -27,6 +27,8 @@ import { AppMerchantRegistrationDialog } from './merchant/merchant-registration/
 import { PendingApprovalComponent } from './officer/approve-merchants/pending-approval.component';
 import { ManageProductsComponent } from './merchant/manage-products/manage-products.component';
 import { RegisterCustomerDialog } from './register-customer/register-customer.component';
+import { HttpClientModule } from '@angular/common/http';
+import { TourService } from './services/tour/tour.service';
 
 @NgModule({
   declarations: [
@@ -56,9 +58,10 @@ import { RegisterCustomerDialog } from './register-customer/register-customer.co
     AppMerchantRegistrationDialog,
     PendingApprovalComponent,
     ManageProductsComponent,
-    RegisterCustomerDialog
+    RegisterCustomerDialog,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [TourService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

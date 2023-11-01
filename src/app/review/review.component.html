@@ -1,25 +1,25 @@
 <div class="center-align">
     <div class="container">
-        <img [src]="tour.imageUrl" [alt]="tour.name"/>
+        <img [src]="rtour.imageUrl" [alt]="rtour.name"/>
         <div class="details">
             <div class="header">
                 <span class="name">
-                    {{tour.name}}
+                    {{rtour.name}}
                 </span>
             </div>
             <div class="date">
                 <span >
-                    {{tour.date}}
+                    {{rtour.date}}
                 </span>
             </div>
             <div class="pax">
                 <span >
-                    {{tour.pax}}
+                    {{rtour.pax}}
                 </span>
             </div>
             <div class="price">
                 <span>
-                    RM {{tour.price}}
+                    RM {{rtour.price}}
                 </span>
             </div>
         </div>
@@ -34,7 +34,7 @@
                 <ngb-rating [max]="5"></ngb-rating>
             </div>
             <div class="comment">
-                <form (submit)="onSubmitPost(rateForm)" #rateForm="ngForm">
+                <form (submit)="onSubmitReview(rateForm)" #rateForm="ngForm">
                     <mat-form-field>
                         <mat-label>Leave a comment</mat-label>
                         <textarea 

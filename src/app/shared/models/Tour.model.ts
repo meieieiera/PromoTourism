@@ -1,9 +1,9 @@
 export class Tour{
     id!:number;
-    imageUrl!:string;
     name!:string;
-    stars:number=0;
     price!:number;
+    stars:number=0;
+    imageUrl!:string;
     date!:string;
     pax!:number;
 }

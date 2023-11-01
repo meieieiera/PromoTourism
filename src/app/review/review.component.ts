@@ -37,7 +37,7 @@ export class ReviewComponent implements OnInit {
       return;
     }
     this.openDialog('0ms', '0ms')
-    this.tourService.removeReviewTour(this.rtour.id)
+    this.tourService.removeReviewTour(this.rtour._id)
   }
   ngOnInit():void{
     

@@ -1,4 +1,5 @@
 export class reviewTour{
+    _id:string
     id!:number;
     name!:string;
     price!:number;

@@ -1,8 +1,12 @@
 const express=require ('express');
 const bodyParser=require('body-parser');
-const Tour = require('./models/tour');
+// const Tour = require('./models/tour');
 const mongoose=require('mongoose');
 const ReviewTour=require('./models/reviewTour');
+
+const Customer=require('./models/customer');
+
+const { Officer, Merchant, Document, Tour } = require('./models/officer');
 
 const app=express();
 
@@ -52,14 +56,32 @@ app.post("/api/rtours",(req,res,next)=>{
 
 })
 
-//get tours
-app.get("/api/tours", (req, res, next) => {
-    Tour.find()
+// //get tours
+// app.get("/api/tours", (req, res, next) => {
+//     Tour.find()
+//       .then((documents) => {
+//         console.log('Got the tours');
+//         res.status(200).json({
+//           message: 'Tour fetched successfully',
+//           tours: documents
+//         });
+//       })
+//       .catch((error) => {
+//         console.error('Error fetching tours:', error);
+//         res.status(500).json({
+//           message: 'Error fetching tours'
+//         });
+//       });
+//   });
+  //get tours from officer>merchants
+app.get("/api/omTours", (req, res, next) => {
+    Officer.find()
       .then((documents) => {
-        console.log('Got the tours');
+        console.log('Got the officer');
+        console.log(documents);
         res.status(200).json({
           message: 'Tour fetched successfully',
-          tours: documents
+          officers: documents
         });
       })
       .catch((error) => {
@@ -90,6 +112,7 @@ app.get("/api/rtours", (req, res, next) => {
   
 //delete post
 app.delete('/api/rtour/:id',(req,res,next)=>{
+    console.log(req.params.id);
     ReviewTour.deleteOne({_id:req.params.id}).then(result=>{
         console.log(result);
         res.status(200).json({

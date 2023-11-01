@@ -1,0 +1,14 @@
+[{
+    "name": "alicia",
+    "password": "123",
+    "email": "aliciar@gmail.com",
+    "number": "012-3456789",
+    "reviewTours": []
+}
+,{
+    "name": "john",
+    "password": "123",
+    "email": "john@gmail.com",
+    "number": "012-3456789",
+    "reviewTours": []
+}]

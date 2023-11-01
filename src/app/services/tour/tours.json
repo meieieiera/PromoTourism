@@ -1,110 +1,199 @@
-[
 {
-    "id":1,
-    "name": "Bako National Park with Sea Stack Formation Day Tour in Kuching",
-    "price": 310,
-    "stars": 4,
-    "imageUrl":"/assets/images/tours/bakoPark.png",
-    "date": "1 OCT 2023",
-    "pax": 3
-},
-{
-    "id":2,
-    "name": "Kuala Lumpur Suburbs and Batu Caves Tour",
-    "price": 40,
-    "stars": 4.5,
-    "imageUrl":"/assets/images/tours/batucaves.png",
-    "date": "28 SEPT 2023",
-    "pax": 2
-},
-{
-    "id":3,
-    "name": "Cameron Highlands Day Tour",
-    "price": 340,
-    "stars": 5,
-    "imageUrl":"/assets/images/tours/cameran.png",
-    "date": "25 SEPT 2023",
-    "pax": 4
-},
-{
-    "id":4,
-    "name": "Genting Highlands and Batu Caves Day Tour",
-    "price": 130,
-    "stars": 4.5,
-    "imageUrl":"/assets/images/tours/genting.png",
-    "date": "20 AUG 2023",
-    "pax": 2
-},
-{
-    "id":5,
-    "name": "Colmar Bukit Tinggi and Japanese Village Day Tour from Kuala Lumpur",
-    "price": 196,
-    "stars": 4,
-    "imageUrl":"/assets/images/tours/japaneseVillage.png",
-    "date": "15 AUG 2023",
-    "pax": 1
-},
-{
-    "id":6,
-    "name": "Mount Kinabalu Climb Via Ferrata Package",
-    "price": 2720,
-    "stars": 4,
-    "imageUrl":"/assets/images/tours/kinabalu.png",
-    "date": "18 JULY 2023",
-    "pax": 3
-},
-{
-    "id":7,
-    "name": "Kuala Selangor Full Day Tour from Kuala Lumpur",
-    "price": 192.80,
-    "stars": 3.5,
-    "imageUrl":"/assets/images/tours/kualaSelangor.png",
-    "date": "5 JUNE 2023",
-    "pax": 2
-},
-{
-    "id":8,
-    "name": "Langkawi Island Hopping Shared Speedboat Tour",
-    "price": 40,
-    "stars": 4.5,
-    "imageUrl":"/assets/images/tours/langkawi.png",
-    "date": "28 MAY 2023",
-    "pax": 1
-},
-{
-    "id":9,
-    "name": "Mari Mari Cultural Village Half Day Tour",
-    "price": 100,
-    "stars": 5,
-    "imageUrl":"/assets/images/tours/mari.png",
-    "date": "10 MAY 2023",
-    "pax": 2
-},
-{
-    "id":10,
-    "name": "Historical Melaka Tour with Lunch from Kuala Lumpur",
-    "price": 145,
-    "stars": 3,
-    "imageUrl":"/assets/images/tours/melaka.png",
-    "date": "14 APRIL 2023",
-    "pax": 5
-},
-{
-    "id":11,
-    "name": "KL City of Lights Tour with Hop-on Hop-off Bus",
-    "price": 35,
-    "stars": 3.5,
-    "imageUrl":"/assets/images/tours/sunsetKL.png",
-    "date": "3 APRIL 2023",
-    "pax": 1
-},
-{
-    "id":12,
-    "name": "Tanjung Rhu Mangrove Tour with Lunch and Transfers in Langkawi",
-    "price": 100,
-    "stars": 4.5,
-    "imageUrl":"/assets/images/tours/tanjungRhu.png",
-    "date": "21 MAR 2023",
-    "pax": 2
-}
-]
+    "email": "sam@gmail.com",
+    "password": "123",
+    "merchants": [
+      {
+        "id": 1,
+        "name": "ABC Industries",
+        "number": "012-3456789",
+        "email": "customer@abcindustries.com",
+        "description": "We are abc industies leading in sales of package trips to Thailand and Singapore",
+        "documents":[{
+            "name":"Company Registration Certificate",
+            "description":"Description",
+            "file":"/assets/images/tours/sunsetKL.png"
+        },
+        {
+            "name":"Company Operational Status",
+            "description":"Description",
+            "file":"/assets/images/tours/sunsetKL.png"
+        }
+        ],
+        "tours":[{
+            "id":1,
+            "name": "Bako National Park with Sea Stack Formation Day Tour in Kuching",
+            "description":"mbark on an immersive day tour into the wilderness of Sarawak’s oldest and most renowned national park! Wander around Bako National Park’s sun-dappled trails and observe its resident stars, the proboscis monkeys Traverse a verdant forest to discover jungle streams, sweeping coastlines, secret coves, and spot rare wildlife Marvel at the park’s famous sea stacks, which are outcrops near the shore, and take snapshots of them",
+            "quantity":2000,
+            "price": 310,
+            "stars": 4,
+            "imageUrl":"/assets/images/tours/bakoPark.png",
+            "date": "1 OCT 2023",
+            "pax": 3
+        },
+        {
+            "id":2,
+            "name": "Kuala Lumpur Suburbs and Batu Caves Tour",
+            "description":
+            "Leave the busy city behind for a chance to explore Kuala Lumpur's beautiful countryside Visit the rural Malay villages, the Royal Selangor Pewter, Chocolate Shops and more Discover the Batu Caves, a Hindu temple and catch a glimpse of the city from the height of 272 steps Learn about Malaysia's rich history, traditions and customs in the suburbs",
+            "quantity":1643,
+            "price": 40,
+            "stars": 4.5,
+            "imageUrl":"/assets/images/tours/batucaves.png",
+            "date": "28 SEPT 2023",
+            "pax": 2
+        },
+        {
+            "id":3,
+            "name": "Cameron Highlands Day Tour",
+            "description":"Leave the busy Kuala Lumpur for an amazing wilderness adventure in the Cameron Highlands Learn about tea production, visit bee and butterfly farms enjoy marvelous valley views Taste and pick fresh strawberries at the local strawberry farm and cool down by a waterfall Head over to the fruit and vegetable market to enjoy fresh produce and try bargaining like a local",
+            "quantity":213,
+            "price": 340,
+            "stars": 5,
+            "imageUrl":"/assets/images/tours/cameran.png",
+            "date": "25 SEPT 2023",
+            "pax": 4
+        },
+        {
+            "id":4,
+            "name": "Genting Highlands and Batu Caves Day Tour",
+            "description":"description",
+            "quantity":400,
+            "price": 130,
+            "stars": 4.5,
+            "imageUrl":"/assets/images/tours/genting.png",
+            "date": "20 AUG 2023",
+            "pax": 2
+        }
+        ]
+      },
+      {
+        "id": 2,
+        "name": "DEF Industries",
+        "number": "076-75433345",
+        "email": "customer@defindustries.com",
+        "description": "We are def industies leading in sales of package trips in South East Asia",
+        "documents":[{
+            "name":"Company Registration Certificate",
+            "description":"Description",
+            "file":"/assets/images/tours/sunsetKL.png"
+        },
+        {
+            "name":"Company Operational Status",
+            "description":"Description",
+            "file":"/assets/images/tours/sunsetKL.png"
+        }
+        ],
+        "tours":[
+            {
+                "id":5,
+                "name": "Colmar Bukit Tinggi and Japanese Village Day Tour from Kuala Lumpur",
+                "description":"description",
+                "quantity":123,
+                "price": 196,
+                "stars": 4,
+                "imageUrl":"/assets/images/tours/japaneseVillage.png",
+                "date": "15 AUG 2023",
+                "pax": 1
+            },
+            {
+                "id":6,
+                "name": "Mount Kinabalu Climb Via Ferrata Package",
+                "description":"description",
+                "quantity":567,
+                "price": 2720,
+                "stars": 4,
+                "imageUrl":"/assets/images/tours/kinabalu.png",
+                "date": "18 JULY 2023",
+                "pax": 3
+            },
+            {
+                "id":7,
+                "name": "Kuala Selangor Full Day Tour from Kuala Lumpur",
+                "description":"description",
+                "quantity":300,
+                "price": 192.80,
+                "stars": 3.5,
+                "imageUrl":"/assets/images/tours/kualaSelangor.png",
+                "date": "5 JUNE 2023",
+                "pax": 2
+            },
+            {
+                "id":8,
+                "name": "Langkawi Island Hopping Shared Speedboat Tour",
+                "description":"description",
+                "quantity":700,
+                "price": 40,
+                "stars": 4.5,
+                "imageUrl":"/assets/images/tours/langkawi.png",
+                "date": "28 MAY 2023",
+                "pax": 1
+            }
+        ]
+      },
+      {
+        "id": 3,
+        "name": "XYZ Industries",
+        "number": "012-2223333",
+        "email": "customer@xyzindustries.com",
+        "description": "We are xyc industies leading in sales of package trips to New Zealand",
+        "documents":[{
+            "name":"Company Registration Certificate",
+            "description":"Description",
+            "file":"/assets/images/tours/sunsetKL.png"
+        },
+        {
+            "name":"Company Operational Status",
+            "description":"Description",
+            "file":"/assets/images/tours/sunsetKL.png"
+        }
+        ],
+        "tours":[
+            {
+                "id":9,
+                "name": "Mari Mari Cultural Village Half Day Tour",
+                "description":"description",
+                "quantity":800,
+                "price": 100,
+                "stars": 5,
+                "imageUrl":"/assets/images/tours/mari.png",
+                "date": "10 MAY 2023",
+                "pax": 2
+            },
+            {
+                "id":10,
+                "name": "Historical Melaka Tour with Lunch from Kuala Lumpur",
+                "description":"description",
+                "quantity":500,
+                "price": 145,
+                "stars": 3,
+                "imageUrl":"/assets/images/tours/melaka.png",
+                "date": "14 APRIL 2023",
+                "pax": 5
+            },
+            {
+                "id":11,
+                "name": "KL City of Lights Tour with Hop-on Hop-off Bus",
+                "description":"description",
+                "quantity":200,
+                "price": 35,
+                "stars": 3.5,
+                "imageUrl":"/assets/images/tours/sunsetKL.png",
+                "date": "3 APRIL 2023",
+                "pax": 1
+            },
+            {
+                "id":12,
+                "name": "Tanjung Rhu Mangrove Tour with Lunch and Transfers in Langkawi",
+                "description":"description",
+                "quantity":100,
+                "price": 100,
+                "stars": 4.5,
+                "imageUrl":"/assets/images/tours/tanjungRhu.png",
+                "date": "21 MAR 2023",
+                "pax": 2
+            }
+
+        ]
+      }
+    ]
+  }

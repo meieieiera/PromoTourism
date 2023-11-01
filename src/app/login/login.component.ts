@@ -22,6 +22,7 @@ export class LoginComponent implements OnInit{
    // Access the userType after login
    this.usertype = this.loginService.getUserType();
    this.loginService.setUserType(this.usertype);
+   
    if(this.usertype=='user'){
     this.router.navigateByUrl(``);
    }

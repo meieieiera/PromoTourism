@@ -34,7 +34,7 @@ export class LoginService {
     this.loggedIn = false;
     this.userType = '';
     this.usertypeSubject.next(''); // Notify subscribers that userType has changed to ''
-  this.logoutSubject.next(); // Notify subscribers when a user logs out
+    this.logoutSubject.next(); // Notify subscribers when a user logs out
   }
   isLoggedIn() {
     return this.loggedIn;

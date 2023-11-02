@@ -23,45 +23,45 @@ export class TourService {
   getReviewTourById(id:number): reviewTour{
     return this.rTours.find(rtour=>rtour.id == id)!;
   }
-  // getAll(){
-  //   this.http.get<{message:string,tours:any}>('http://localhost:3000/api/tours')
-  //       .pipe(map((tourData)=>{
-  //           return tourData.tours.map(tour=>{
-  //               return{
-  //                   id:tour.id,
-  //                   name:tour.name,
-  //                   price:tour.price,
-  //                   stars:tour.stars,
-  //                   imageUrl:tour.imageUrl,
-  //                   date:tour.date,
-  //                   pax:tour.pax,
-  //                   _id:tour._id
-  //               };
-  //           });
-  //       }))
-  //       .subscribe((transformedPosts)=>{
-  //           this.tours=transformedPosts;
-  //           this.toursUpdated.next([...this.tours]);
-  //       })
-  //   }
-    getAll(){
-      this.http.get<{ message: string, officers: any }>('http://localhost:3000/api/omTours')
-      .pipe(
-        map((officerData) => {
-          const allTours: Tour[] = [];
-          officerData.officers.forEach((officer) => {
-            officer.merchants.forEach((merchant) => {
-              allTours.push(...merchant.tours);
+  getAll(){
+    this.http.get<{message:string,tours:any}>('http://localhost:3000/api/tours')
+        .pipe(map((tourData)=>{
+            return tourData.tours.map(tour=>{
+                return{
+                    id:tour.id,
+                    name:tour.name,
+                    price:tour.price,
+                    stars:tour.stars,
+                    imageUrl:tour.imageUrl,
+                    date:tour.date,
+                    pax:tour.pax,
+                    _id:tour._id
+                };
             });
-          });
-          return allTours;
+        }))
+        .subscribe((transformedPosts)=>{
+            this.tours=transformedPosts;
+            this.toursUpdated.next([...this.tours]);
         })
-      )
-      .subscribe((tours) => {
-        this.tours = tours;
-        this.toursUpdated.next([...this.tours]);
-      });
-      }
+    }
+    // getAll(){
+    //   this.http.get<{ message: string, officers: any }>('http://localhost:3000/api/omTours')
+    //   .pipe(
+    //     map((officerData) => {
+    //       const allTours: Tour[] = [];
+    //       officerData.officers.forEach((officer) => {
+    //         officer.merchants.forEach((merchant) => {
+    //           allTours.push(...merchant.tours);
+    //         });
+    //       });
+    //       return allTours;
+    //     })
+    //   )
+    //   .subscribe((tours) => {
+    //     this.tours = tours;
+    //     this.toursUpdated.next([...this.tours]);
+    //   });
+    //   }
   getToursUpdateListener(){
       return this.toursUpdated.asObservable();
     }

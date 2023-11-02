@@ -1,0 +1,25 @@
+[{
+    "email": "alicia@gmail.com",
+    "password": "123",
+    "userType": "customer"
+}
+,{
+    "email": "customer@abcindustries.com",
+    "password": "123",
+    "userType": "merchant"
+},
+{
+    "email": "customer@defindustries.com",
+    "password": "123",
+    "userType": "merchant"
+},
+{
+    "email": "customer@xyzindustries.com",
+    "password": "123",
+    "userType": "merchant"
+}
+,{
+    "email": "jason@gmail.com",
+    "password": "123",
+    "userType": "officer"
+}]

@@ -1,6 +1,7 @@
 const mongoose=require('mongoose');
 
 const reviewTourSchema=mongoose.Schema({
+    tourId:{type:mongoose.Schema.Types.ObjectId, ref:'Tour', required:true},
     id: {type:Number, required:true},
     name:{type:String, required:true},
     description:{type:String, required:true},
@@ -13,10 +14,11 @@ const reviewTourSchema=mongoose.Schema({
 
 const customerSchema=mongoose.Schema({
     name:{type:String,required:true},
-    email:{type:String, required:true},
-    password:{type:String,required:true},
+    // email:{type:String, required:true},
+    // password:{type:String,required:true},
     number:{type:String,required:true},
-    reviewTours:[reviewTourSchema]
+    reviewTours:[reviewTourSchema],
+    userId:{type:String,required:true}//reference to user
 });
 
 // Create models for the schemas

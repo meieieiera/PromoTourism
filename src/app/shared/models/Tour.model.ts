@@ -6,4 +6,5 @@ export class Tour{
     imageUrl!:string;
     date!:string;
     pax!:number;
+    _id:string;
 }

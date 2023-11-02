@@ -1,12 +1,14 @@
 const express=require ('express');
 const bodyParser=require('body-parser');
-// const Tour = require('./models/tour');
 const mongoose=require('mongoose');
-const ReviewTour=require('./models/reviewTour');
-
 const Customer=require('./models/customer');
+const Merchant=require('./models/merchants');
+const Tour=require('./models/tour');
+const User=require('./models/user');
 
-const { Officer, Merchant, Document, Tour } = require('./models/officer');
+const bcrypt=require("bcrypt");
+const jwt=require('jsonwebtoken');
+const checkAuth=require("./middleware/check-auth");
 
 const app=express();
 
@@ -23,7 +25,7 @@ app.use(bodyParser.json());
 app.use((req,res,next)=>{
    
     res.setHeader("Access-Control-Allow-Origin","*");
-    res.setHeader("Access-Control-Allow-Headers","Origin, X-Requested-With, Content-Type, Accept");
+    res.setHeader("Access-Control-Allow-Headers","Origin, X-Requested-With, Content-Type, Accept, Authorization");
     res.setHeader("Access-Control-Allow-Methods","GET, POST, PATCH, DELETE, OPTIONS, PUT");
     next();
 });
@@ -56,32 +58,14 @@ app.post("/api/rtours",(req,res,next)=>{
 
 })
 
-// //get tours
-// app.get("/api/tours", (req, res, next) => {
-//     Tour.find()
-//       .then((documents) => {
-//         console.log('Got the tours');
-//         res.status(200).json({
-//           message: 'Tour fetched successfully',
-//           tours: documents
-//         });
-//       })
-//       .catch((error) => {
-//         console.error('Error fetching tours:', error);
-//         res.status(500).json({
-//           message: 'Error fetching tours'
-//         });
-//       });
-//   });
-  //get tours from officer>merchants
-app.get("/api/omTours", (req, res, next) => {
-    Officer.find()
+//get tours
+app.get("/api/tours", (req, res, next) => {
+    Tour.find()
       .then((documents) => {
-        console.log('Got the officer');
-        console.log(documents);
+        console.log('Got the tours');
         res.status(200).json({
           message: 'Tour fetched successfully',
-          officers: documents
+          tours: documents
         });
       })
       .catch((error) => {
@@ -91,6 +75,50 @@ app.get("/api/omTours", (req, res, next) => {
         });
       });
   });
+  //get tours
+// app.get("/api/tours", (req, res, next) => {
+//   let mercId;
+//   Merchant.find({id:1}).then((merchant)=>{
+//     mercId=(merchant[0]._id).toString();
+//     // mercId=merchant[0].id;
+//     // console.log(merchant[0]._id)
+//     console.log(mercId)
+//     Tour.find({merchantId:mercId})
+//     .then((documents) => {
+//       console.log(documents)
+//       res.status(200).json({
+//         message: 'Tour fetched successfully',
+//         tours: documents
+//       });
+//     })
+//     .catch((error) => {
+//       console.error('Error fetching tours:', error);
+//       res.status(500).json({
+//         message: 'Error fetching tours'
+//       });
+//     });
+//   });
+
+  
+// });
+//   //get tours from officer>merchants
+// app.get("/api/omTours", (req, res, next) => {
+//     Officer.find()
+//       .then((documents) => {
+//         console.log('Got the officer');
+//         console.log(documents);
+//         res.status(200).json({
+//           message: 'Tour fetched successfully',
+//           officers: documents
+//         });
+//       })
+//       .catch((error) => {
+//         console.error('Error fetching tours:', error);
+//         res.status(500).json({
+//           message: 'Error fetching tours'
+//         });
+//       });
+//   });
 
 //get review tours
 app.get("/api/rtours", (req, res, next) => {
@@ -121,6 +149,49 @@ app.delete('/api/rtour/:id',(req,res,next)=>{
         });
     })
 });
+//login post
+app.post('/api/user/login',(req,res,next)=>{
+  let fetchedUser;
+  User.findOne({email:req.body.email})
+  .then(user=>{
+      console.log(user);
+      console.log(req.body.password);
+      console.log(user.password);
+      if(!user){
+          return res.status(401).json({
+              message:'Auth failed'
+          });
+      }
+      fetchedUser=user
+      return bcrypt.compare(req.body.password,user.password)
+      // if (!bcrypt.compare(req.body.password,user.password)){
+      //   return req.body.password===user.password
+      // }
+  })
+  .then(result=>{
+      console.log(result);
+      if(!result){
+          return res.status(401).json({
+              message: 'Auth failed'
+          });
+      }
+      const token=jwt.sign(
+          {email:fetchedUser.email,userId:fetchedUser._id},
+          'this_secret',
+          {expiresIn: '1h'}
+      )
+      res.status(200).json({
+          token: token,
+          user:fetchedUser
+      })
+  })
+  .catch(err=>{
+      return res.status(401).json({
+          message:'Auth failed'
+      });
+  })
+})
+
 
 
 module.exports=app;

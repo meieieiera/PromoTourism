@@ -1,0 +1,59 @@
+[{
+    "id":1,
+    "name": "ABC Industries",
+    "number": "012-3456789",
+    "description":"We are abc industies leading in sales of package trips to Thailand and Singapore",
+    "documents":[{
+        "name":"Company Registration Certificate",
+        "description":"Description",
+        "file":"/assets/images/tours/sunsetKL.png"
+    },
+    {
+        "name":"Company Operational Status",
+        "description":"Description",
+        "file":"/assets/images/tours/sunsetKL.png"
+    }
+    ],
+    "tours": ["6543dba5c906620f56f760a6","6543dba5c906620f56f760a7","6543dba5c906620f56f760a8","6543dba5c906620f56f760a9"],
+    "userId":"6543d465c906620f56f7609e"
+},
+{
+    "id":2,
+    "name": "DEF Industries",
+    "number": "076-75433345",
+    "description":"We are def industies leading in sales of package trips in South East Asia",
+    "documents":[{
+        "name":"Company Registration Certificate",
+        "description":"Description",
+        "file":"/assets/images/tours/sunsetKL.png"
+    },
+    {
+        "name":"Company Operational Status",
+        "description":"Description",
+        "file":"/assets/images/tours/sunsetKL.png"
+    }
+    ],
+    "tours": ["6543dba5c906620f56f760aa","6543dba5c906620f56f760ab","6543dba5c906620f56f760ac","6543dba5c906620f56f760ad"],
+    "userId":"6543d465c906620f56f7609f"
+},
+{
+    "id":3,
+    "name": "XYZ Industries",
+    "number": "012-2223333",
+    "description":"We are xyc industies leading in sales of package trips to New Zealand",
+    "documents":[{
+        "name":"Company Registration Certificate",
+        "description":"Description",
+        "file":"/assets/images/tours/sunsetKL.png"
+    },
+    {
+        "name":"Company Operational Status",
+        "description":"Description",
+        "file":"/assets/images/tours/sunsetKL.png"
+    }
+    ],
+    "tours": ["6543dba5c906620f56f760ae","6543dba5c906620f56f760af","6543dba5c906620f56f760b0","6543dba5c906620f56f760b1"],
+    "userId":"6543d465c906620f56f760a0"
+}
+
+]

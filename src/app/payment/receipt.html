@@ -32,9 +32,14 @@ a{
 
 <div>
   <h4>Payment success!</h4>
-  <button class="btn">
+  <!-- <button class="btn">
     <i class="fa fa-download"></i>
     <a href="../../assets/receiptTemplate.pdf" 
     download>Download receipt</a>
+  </button> -->
+  <button class="btn" (click)="generateReceipt()">
+    <i class="fa fa-download"></i>
+    Download receipt
   </button>
+
 </div>

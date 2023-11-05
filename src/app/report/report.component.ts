@@ -15,6 +15,7 @@ import {
 import { auto } from '@popperjs/core';
 import { LoginService } from '../services/login/login.service';
 import { Merchant } from '../shared/models/merchant.model';
+import { ActivatedRoute } from '@angular/router';
 
 
 @Component({
@@ -26,18 +27,31 @@ export class ReportComponent implements OnInit{
   selectedRow!: MerchantList | null;
   userId='';
   merchant:Merchant;
+  name='';
+  id=0;
   constructor(private merchantService: MerchantService,
-    private loginService:LoginService) {
+    private loginService:LoginService, private activatedRoute:ActivatedRoute) {
+    
     this.merchantService.getSelectedRowData().subscribe(data => {
       this.selectedRow = data;
     });
-    
   }
   ngOnInit(): void {
-    this.userId=this.loginService.getUserId();
+    // if(!this.selectedRow.userId){
+    //   this.userId=this.loginService.getUserId();
+    // }else{
+    //   this.userId=this.selectedRow.userId;
+    // }
+    if(this.loginService.getUserType()==='merchant'){
+      this.userId=this.loginService.getUserId();
+    }else{
+      this.userId=this.selectedRow.userId;
+    }
     this.merchantService.getMerchantById(this.userId).subscribe(merchant => {
       this.merchant = merchant;
-      const purchasingPower = this.merchant.revenue / this.merchant.productsSold;
+      this.name = merchant.name;
+      this.id = merchant.id;
+      const purchasingPower = parseFloat((this.merchant.revenue / this.merchant.productsSold).toFixed(2));
       this.chartSeries[0].data[10] = this.merchant.revenue;
       this.chartSeries[1].data[10] = this.merchant.productsSold;
       this.chartSeries[2].data[10] = purchasingPower;

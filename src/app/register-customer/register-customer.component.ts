@@ -13,6 +13,7 @@ import {NgForm} from '@angular/forms';
 import { forwardRef } from "@angular/core";
 import { MatDividerModule } from '@angular/material/divider';
 import { MatButton } from '@angular/material/button';
+import { LoginService } from '../services/login/login.service';
 
 
 @Component({
@@ -36,5 +37,13 @@ export class RegisterCustomerDialog {
   hide = true;
   emailFormControl = new FormControl('', [Validators.required, Validators.email]);
 
+  constructor(private loginService:LoginService){}
+
+  onRegister(form:NgForm){
+    if(form.invalid){
+      return;
+    }
+    this.loginService.registerCustomer(form.value.name,form.value.contactNum,form.value.email,form.value.password);
+  }
 }
 

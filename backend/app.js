@@ -55,12 +55,12 @@ app.post("/api/rtours",(req,res,next)=>{
       customer.reviewTours = existingTourIds;
       return customer.save();
     })
-    .then((updatedCustomer) => {
-      res.status(200).json({
-        message: 'Tour added successfully',
-        customer: updatedCustomer
-      });
-    })
+    // .then((updatedCustomer) => {
+    //   res.status(200).json({
+    //     message: 'Tour added successfully'
+    //     // customer: updatedCustomer
+    //   });
+    // })
     .catch((error) => {
       console.error('Error adding tour:', error);
       res.status(500).json({
@@ -69,7 +69,7 @@ app.post("/api/rtours",(req,res,next)=>{
     });
 });
 
-//get tours
+//get all tours
 app.get("/api/tours", (req, res, next) => {
     Tour.find()
       .then((documents) => {
@@ -85,6 +85,23 @@ app.get("/api/tours", (req, res, next) => {
         });
       });
   });
+
+  //get all merchants
+app.get("/api/merchants", (req, res, next) => {
+  Merchant.find()
+    .then((merchants) => {
+      res.status(200).json({
+        message: 'Merchants fetched successfully',
+        merchants: merchants
+      });
+    })
+    .catch((error) => {
+      console.error('Error fetching merchants:', error);
+      res.status(500).json({
+        message: 'Error fetching merchants'
+      });
+    });
+});
 
   //get merchant by user id
 app.get("/api/merchant/:uid", (req, res, next) => {
@@ -242,6 +259,38 @@ app.post('/api/user/login',(req,res,next)=>{
       return res.status(401).json({
           message:'Auth failed'
       });
+  })
+})
+
+//register customer
+app.post('/api/registerCustomer',(req,res,next)=>{
+  console.log("email from backend below")
+  console.log(req.body.email);
+  bcrypt.hash(req.body.password,10)
+  .then(hash=>{
+    const user = new User({
+      email:req.body.email,
+      password:hash,
+      userType:'customer'
+    });
+    user.save().then(user=>{
+      console.log('user created below')
+      console.log(user)
+    })
+    return user
+  })
+  .then(user=>{
+    const customer = new Customer({
+      name:req.body.name,
+      number:req.body.contact,
+      reviewTours:[],
+      userId:user._id.toString()
+    });
+    customer.save().then(customer=>{
+      res.status(201).json({
+        message:'Customer registered'
+      })
+    })
   })
 })
 

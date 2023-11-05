@@ -2,6 +2,9 @@
 <div *ngIf="selectedRow" class="merchant">
     <h2>Sales Report for {{ selectedRow.name }} ({{ selectedRow.id }})</h2>
 </div>
+<div *ngIf="!selectedRow" class="merchant">
+  <h2>Sales Report for {{ name }} ({{ id }})</h2>
+</div>
 
 <div class="chartOuter">
 <div class="chartContainer">

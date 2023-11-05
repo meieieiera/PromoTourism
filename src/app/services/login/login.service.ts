@@ -12,7 +12,7 @@ export class LoginService {
   private userType='';
   private userId='';
   private usertypeSubject = new Subject<string>(); // Create a Subject
-  private logoutSubject = new Subject<void>(); // Create a Subject for logout notification
+  private logoutSubject = new Subject<boolean>(); // Create a Subject for logout notification
   private userIdSubject = new Subject<string>();
   private authStatusListener=new Subject<boolean>();
 
@@ -53,7 +53,7 @@ export class LoginService {
         } else if (this.userType === 'officer') {
           this.authStatusListener.next(true);
           this.loggedIn=true;
-          this.router.navigate(['merchantList']);
+          this.router.navigate(['approveMer']);
         } else {
           this.authStatusListener.next(false);
           this.router.navigate(['']);
@@ -62,16 +62,14 @@ export class LoginService {
     });
 }
   logout() {
-    // this.loggedIn = false;
+    this.loggedIn = false;
     this.userType = '';
     this.usertypeSubject.next(''); // Notify subscribers that userType has changed to ''
-    // this.logoutSubject.next(); // Notify subscribers when a user logs out
+    this.logoutSubject.next(true); // Notify subscribers when a user logs out
     this.token=null;
     this.authStatusListener.next(false);
   }
-  isLoggedIn() {
-    return this.loggedIn;
-  }
+ 
   getUserType(){
     return this.userType;
   }
@@ -95,22 +93,20 @@ export class LoginService {
   onLogout() {
     return this.logoutSubject.asObservable(); // Observable to notify components on logout
   }
+  isLoggedIn() {
+    return this.loggedIn;
+  }
+  registerCustomer(name:string, contact:string,email:string,password:string){
+    const data={
+      name:name,
+      contact:contact,
+      email:email,
+      password:password
+    }
+    this.http.post('http://localhost:3000/api/registerCustomer',data)
+    .subscribe(response=>{
+      console.log(response);
+    })
+  }
 }
-// login(username:string,password:string){
-  //   if (username=='alicia'){
-  //     this.userType='user';
-  //     this.loggedIn=true;
-  //   }
-  //   else if(username=='bob'){
-  //     this.userType='merchant';
-  //     this.loggedIn=true;
-  //   }
-  //   else if(username=='sam'){
-  //     this.userType='officer';
-  //     this.loggedIn=true;
-  //   }
-  //   else{
-  //     this.userType='';
-  //     this.loggedIn=false;
-  //   }
-  // }
+

@@ -33,6 +33,7 @@ export class TourService {
                 return{
                     id:tour.id,
                     name:tour.name,
+                    description:tour.description,
                     price:tour.price,
                     stars:tour.stars,
                     imageUrl:tour.imageUrl,
@@ -57,8 +58,7 @@ export class TourService {
       tourId:_id,
       customerId: customerId
   };
-    this.http
-    .post<{message:string}>('http://localhost:3000/api/rtours',data)
+    this.http.post<{message:string}>('http://localhost:3000/api/rtours',data)
     .subscribe((responseData)=>{
         console.log(responseData.message);
     });  

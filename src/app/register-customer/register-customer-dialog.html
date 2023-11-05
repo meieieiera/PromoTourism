@@ -2,7 +2,7 @@
 <div mat-dialog-content>
 <div>
   <!--(submit)="onAddMerchant(merchantReg)"-->
-<form #customerReg="ngForm">
+<form (submit)="onRegister(customerReg)" #customerReg="ngForm">
   <div>
     <mat-form-field>
       <mat-label>Full Name: </mat-label>
@@ -19,8 +19,8 @@
   
       <div class="">
         <mat-form-field class="example-full-width">
-          <mat-label>Email</mat-label>
-          <input type="email" matInput [formControl]="emailFormControl" placeholder="Ex. pat@example.com" ngModel name="email">
+          <mat-label>Email</mat-label> <!--[formControl]="emailFormControl"-->
+          <input type="email" matInput placeholder="Ex. pat@example.com" ngModel name="email">
           <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
             Please enter a valid email address
           </mat-error>
@@ -34,7 +34,7 @@
         <div class="example-container">
             <mat-form-field>
               <mat-label>Enter your password</mat-label>
-              <input matInput required [type]="hide ? 'password' : 'text'">
+              <input matInput name='password' ngModel required [type]="hide ? 'password' : 'text'">
               <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
                 <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
               </button>
@@ -44,9 +44,10 @@
     <mat-divider></mat-divider>
 <div id="btnCollection">
   <button mat-dialog-close=""
-  mat-flat-button 
-  color="accent"
-  type="submit">Submit</button>
+          mat-flat-button 
+          color="accent"
+          type="submit">Submit
+  </button>
 
 
 <button mat-dialog-close mat-flat-button id="close">Close</button>

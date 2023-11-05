@@ -48,6 +48,9 @@ img{
     content:"Price: ";
     color: darkgrey;
 }
+.description{
+    margin:1.8rem 4rem .3rem 4rem;
+}
 .rating{
     margin-top:.4rem;
 }
@@ -81,6 +84,9 @@ h1{
 h2{
     margin:1.8rem 0 .3rem 4rem;
     color: #E91E63;
+}
+h3{
+    color: #0a66d8;
 }
 .button{
     margin: 0 1.5rem 1.5rem 0;

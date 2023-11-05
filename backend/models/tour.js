@@ -10,6 +10,7 @@ const tourSchema = mongoose.Schema({
     imageUrl: { type: String, required: true },
     date: { type: String, required: true },
     pax: { type: Number, required: true },
+    comments: [{ type: String }],
     merchantId: { type:String , required:true}, // Reference to the merchant
 });
 

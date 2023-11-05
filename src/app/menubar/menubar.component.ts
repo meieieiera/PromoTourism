@@ -3,6 +3,7 @@ import { LoginService } from '../services/login/login.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import {MatDialog} from '@angular/material/dialog';
 import { AppMerchantRegistrationDialog } from '../merchant/merchant-registration/merchant-registration.component';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-menubar',
@@ -11,22 +12,32 @@ import { AppMerchantRegistrationDialog } from '../merchant/merchant-registration
 })
 
 export class MenubarComponent implements OnInit {
-userType='';
-constructor(public dialog: MatDialog, private loginService: LoginService,private router:Router) {} // Inject the UserService
+  private userTypeSubs:Subscription;
+  userType='';
+  userIsAuthenticated = false;
+  private authListenerSubs:Subscription;
+  constructor(public dialog: MatDialog, private loginService: LoginService,private router:Router) {} // Inject the UserService
 
-  openDialog() {
-    this.dialog.open(AppMerchantRegistrationDialog);
+    openDialog() {
+      this.dialog.open(AppMerchantRegistrationDialog);
   }
 
   ngOnInit(): void {
-    this.loginService.onUsertypeChange().subscribe((usertype) => {
-      this.userType = usertype;
-  });
-  // Handle logout
-  this.loginService.onLogout().subscribe(() => {
-    this.userType = ''; // Reset userType when the user logs out
-  });
-}
+    this.authListenerSubs=this.loginService
+    .getAuthStatusListener()
+    .subscribe(isAuthenticated=>{
+        this.userIsAuthenticated=isAuthenticated;
+  })
+    this.userTypeSubs=this.loginService
+        .onUsertypeChange()
+        .subscribe(userType=>{
+            this.userType=userType;
+    });
+    // Handle logout
+    this.loginService.onLogout().subscribe(() => {
+      this.userType = ''; // Reset userType when the user logs out
+    });
+  }
 logout(){
   this.loginService.logout();
   this.router.navigateByUrl(``);
@@ -40,7 +51,7 @@ toReport(){
   }
 }
 toReview(){
-  if(this.userType=='user'){
+  if(this.userType=='customer'){
     this.router.navigateByUrl(`reviewList`);
   }
   else{

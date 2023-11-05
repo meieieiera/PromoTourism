@@ -13,7 +13,8 @@ import {
   ApexStroke
 } from "ng-apexcharts";
 import { auto } from '@popperjs/core';
-
+import { LoginService } from '../services/login/login.service';
+import { Merchant } from '../shared/models/merchant.model';
 
 
 @Component({
@@ -23,39 +24,61 @@ import { auto } from '@popperjs/core';
 })
 export class ReportComponent implements OnInit{
   selectedRow!: MerchantList | null;
-  
+  userId='';
+  merchant:Merchant;
+  constructor(private merchantService: MerchantService,
+    private loginService:LoginService) {
+    this.merchantService.getSelectedRowData().subscribe(data => {
+      this.selectedRow = data;
+    });
+    
+  }
+  ngOnInit(): void {
+    this.userId=this.loginService.getUserId();
+    this.merchantService.getMerchantById(this.userId).subscribe(merchant => {
+      this.merchant = merchant;
+      const purchasingPower = this.merchant.revenue / this.merchant.productsSold;
+      this.chartSeries[0].data[10] = this.merchant.revenue;
+      this.chartSeries[1].data[10] = this.merchant.productsSold;
+      this.chartSeries[2].data[10] = purchasingPower;
+
+      this.yearSeries[0].data[7] = this.merchant.revenue;
+      this.yearSeries[1].data[7] = this.merchant.productsSold;
+      this.yearSeries[2].data[7] = purchasingPower;
+    });
+  }
   chartSeries:ApexAxisChartSeries=[
     {
       name: "Sales profit",
       type: "column",
-      data: [1.4, 2, 2.5, 1.5, 2.5, 2.8, 3.8, 4.6, 4.4, 3.6,2.4, 1.6]
+      data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0,0, 0]
     },
     {
       name: "Products sold",
       type: "column",
-      data: [5, 9, 6, 10, 12, 15, 16, 5, 14, 7, 5, 10]
+      data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
     },
     {
       name: "Customer purchasing power",
       type: "line",
-      data: [20, 29, 37, 36, 44, 45, 50, 58, 60, 40, 80, 40]
+      data: [0, 0, 0,0, 0, 0, 0, 0, 0, 0, 0, 0]
     }
   ]
   yearSeries:ApexAxisChartSeries=[
     {
       name: "Sales profit",
       type: "column",
-      data: [50, 60, 58, 65,69, 55, 80, 65]
+      data: [0, 0, 0, 0,0, 0, 0, 0]
     },
     {
       name: "Products sold",
       type: "column",
-      data: [52, 96, 65, 110, 120, 154, 164, 50]
+      data: [0, 0, 0, 0, 0, 0, 0, 0]
     },
     {
       name: "Customer purchasing power",
       type: "line",
-      data: [240, 350, 460, 480, 520, 560, 600, 650]
+      data: [0, 0, 0, 0, 0, 0, 0, 0]
     }
   ]
   chartDetails: ApexChart={
@@ -94,7 +117,7 @@ export class ReportComponent implements OnInit{
         }
       },
       title: {
-        text: "Sales profit (RM, thousand)",
+        text: "Sales profit (RM)",
         style: {
           color: "#008FFB"
         }
@@ -171,15 +194,8 @@ export class ReportComponent implements OnInit{
     horizontalAlign: "left",
     offsetX: 40
   }
-  constructor(private merchantService: MerchantService) {
-    this.merchantService.getSelectedRowData().subscribe(data => {
-      this.selectedRow = data;
-    });
-    
-  }
-  ngOnInit(): void {
-    throw new Error('Method not implemented.');
-  }
+  
+  
 
   }
 

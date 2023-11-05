@@ -5,6 +5,8 @@ import { TourService } from '../services/tour/tour.service';
 import {MatDialog, MatDialogRef, MatDialogModule} from '@angular/material/dialog';
 import {MatButtonModule} from '@angular/material/button';
 import { NgForm } from '@angular/forms';
+import { Subscription } from 'rxjs';
+import { LoginService } from '../services/login/login.service';
 
 @Component({
   selector: 'app-payment',
@@ -15,8 +17,14 @@ import { NgForm } from '@angular/forms';
 export class PaymentComponent implements OnInit{
   
   tour!:Tour;
+  private userIdSubs:Subscription;
+  userId='';
+  
   constructor(private activatedRoute:ActivatedRoute,
-    private tourService: TourService, private router:Router, public dialog: MatDialog){
+    private tourService: TourService, 
+    private router:Router, 
+    public dialog: MatDialog, 
+    private loginService:LoginService){
     activatedRoute.params.subscribe((params)=>{
       if(params['id'])
       this.tour=tourService.getTourById(params['id']);
@@ -34,11 +42,21 @@ export class PaymentComponent implements OnInit{
       return;
     }
     this.openDialog('0ms', '0ms')
-    this.tourService.addReviewTour(this.tour.id,this.tour.name,this.tour.price,this.tour.imageUrl,this.tour.date,this.tour.pax);
-
+    // this.tourService.addReviewTour(this.tour.id,this.tour.name,this.tour.price,this.tour.imageUrl,this.tour.date,this.tour.pax);
+    this.tourService.addReviewTour(this.tour._id,this.userId);
+    this.tourService.updateAnalysis(this.tour._id);
   }
 
-  ngOnInit():void{}
+  ngOnInit():void{
+    // this.userIdSubs=this.loginService
+    //     .userIdListener()
+    //     .subscribe((userid: string)=>{
+    //         this.userId=userid;
+    // });
+    this.userId=this.loginService.getUserId();
+    console.log(this.userId);
+    console.log("user id above");
+  }
 
 }
 @Component({

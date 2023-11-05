@@ -31,7 +31,7 @@
         <div class="rating-content">
             <div class="rate-star">
                 <h4>Rate your experience</h4>
-                <ngb-rating [max]="5"></ngb-rating>
+                <ngb-rating [max]="5" [(ngModel)]="userRating" name="userRating"></ngb-rating>
             </div>
             <div class="comment">
                 <form (submit)="onSubmitReview(rateForm)" #rateForm="ngForm">
@@ -48,7 +48,7 @@
                     </mat-form-field>
                     <mat-card-footer>
                         <div class="button">
-                            <button mat-raised-button color="accent" type="submit">Save</button>
+                            <button mat-raised-button color="accent" type="submit" [disabled]="!userRating">Save</button>
                         </div>
                     </mat-card-footer>
                 </form>

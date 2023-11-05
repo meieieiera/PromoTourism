@@ -8,8 +8,8 @@
         </div>
     </button>
     <span class="example-space"></span>
-    <button *ngIf="userType===''||userType==='user'" routerLink="" mat-button>Products</button>
-    <button *ngIf="userType===''||userType==='user'" (click)="toReview()" mat-button>Review</button>
+    <button *ngIf="userType===''||userType==='customer'" routerLink="" mat-button>Products</button>
+    <button *ngIf="userType===''||userType==='customer'" (click)="toReview()" mat-button>Review</button>
 
     <button *ngIf="userType===''" (click)="openDialog()" mat-button>Register as merchant</button>
     <button *ngIf="userType==='officer'" routerLink="approveMer" mat-button>Account Management</button>
@@ -17,6 +17,6 @@
     
     <button *ngIf="userType==='officer'||userType==='merchant'" (click)="toReport()" mat-button>Report</button>
     <button *ngIf="userType===''" routerLink="login" mat-raised-button color="accent">Log in</button>
-    <button *ngIf="userType==='user'||userType==='merchant'||userType==='officer'" (click)="logout()" color="primary" mat-raised-button>Log out</button>
+    <button *ngIf="userType==='customer'||userType==='merchant'||userType==='officer'" (click)="logout()" color="primary" mat-raised-button>Log out</button>
 
 </mat-toolbar>

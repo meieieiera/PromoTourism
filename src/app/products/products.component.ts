@@ -12,6 +12,9 @@ import { Subscription } from 'rxjs';
 export class ProductsComponent implements OnInit {
   tours:Tour[]=[];
   private tourSub: Subscription|undefined;
+  userIsAuthenticated=false;
+  private authListenerSubs:Subscription;
+  userId='';
 
   constructor(private tourService:TourService, private loginService:LoginService,
     private router:Router){}
@@ -22,13 +25,24 @@ export class ProductsComponent implements OnInit {
     .subscribe((tours:Tour[])=>{
       this.tours=tours;
   })
-    this.loginService.onUsertypeChange().subscribe((usertype) => {
-      // Handle user type changes
-    });
+    this.authListenerSubs=this.loginService
+    .getAuthStatusListener()
+    .subscribe(isAuthenticated=>{
+        this.userIsAuthenticated=isAuthenticated;
+  })
+  if(!this.userIsAuthenticated){
+    console.log("This user isn't logged in")
+  }else{
+    console.log("user is logged in")
+  }
+  this.userId=this.loginService.getUserId();
+  console.log(this.userId);
+  console.log("user id above")
 }
 toPurchase(id:number){
     if(!this.loginService.isLoggedIn()){
       this.router.navigateByUrl(`login`);
+      console.log("This user not logged in")
     }
     else{
       this.router.navigateByUrl(`purchase/${id}`);

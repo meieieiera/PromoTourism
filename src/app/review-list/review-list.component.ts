@@ -3,6 +3,7 @@ import{TourService} from '../services/tour/tour.service'
 import { Tour } from '../shared/models/Tour.model';
 import { reviewTour } from '../shared/models/reviewTour.model';
 import { Subscription } from 'rxjs';
+import { LoginService } from '../services/login/login.service';
 
 @Component({
   selector: 'app-review-list',
@@ -11,12 +12,14 @@ import { Subscription } from 'rxjs';
 })
 export class ReviewListComponent {
   rtours:reviewTour[]=[];
+  userId='';
   private rTourSub: Subscription|undefined;
 
-  constructor(private tourService:TourService){}
+  constructor(private tourService:TourService, private loginService:LoginService){}
 
   ngOnInit(): void {
-      this.tourService.getReviewTours();
+      this.userId=this.loginService.getUserId();
+      this.tourService.getReviewTours(this.userId);
       this.rTourSub=this.tourService.getReviewToursUpdateListener()
       .subscribe((rtours:reviewTour[])=>{
         this.rtours=rtours;

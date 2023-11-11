@@ -190,8 +190,8 @@ export class receipt {
           },
         },
       };
-      this.mvPDF=pdfMake.createPdf(docDefinition);
-      pdfMake.createPdf(docDefinition).open();//open pdf to view
+      //this.mvPDF=pdfMake.createPdf(docDefinition);
+      //pdfMake.createPdf(docDefinition).open();//open pdf to view
       // // Send the generated PDF as a Blob
       // return new Promise((resolve, reject) => {
       //   this.mvPDF.getBlob((pdfBlob: Blob) => {

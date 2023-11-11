@@ -1,5 +1,4 @@
-<!--(submit)="onAddMerchant(merchantReg)"-->
-<form #merchantReg="ngForm">
+<form (submit)="onMerchantSignup(merchantReg)" #merchantReg="ngForm">
     <mat-form-field>
       <mat-label>Merchant Name: </mat-label>
       <input matInput required ngModel type="text" name="name" #name="ngModel">

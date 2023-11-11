@@ -3,6 +3,7 @@ import { BehaviorSubject, Observable, Subject, map } from 'rxjs';
 import { MerchantList } from 'src/app/merchant-list/merchant-list.component';
 import { Merchant } from 'src/app/shared/models/merchant.model';
 import { HttpClient } from '@angular/common/http';
+import { NgForm } from '@angular/forms';
 
 @Injectable({
   providedIn: 'root'
@@ -54,5 +55,9 @@ export class MerchantService {
     }
     getMerchantsUpdateListener(){
       return this.merchantsUpdated.asObservable();
+    }
+
+    onMerchantSignup(form: NgForm){
+      console.log(form.value)
     }
 }

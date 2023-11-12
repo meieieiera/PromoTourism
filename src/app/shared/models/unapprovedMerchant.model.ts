@@ -1,4 +1,4 @@
-export interface Merchant {
+export interface UnapprovedMerchant {
     name: String;
     contactNum: String;
     email: String;

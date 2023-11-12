@@ -10,11 +10,11 @@ import {NgIf} from '@angular/common';
 import { CommonModule } from '@angular/common';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {NgForm} from '@angular/forms';
-import { DocumentService } from '../uploadDoc.service'; 
-import { Document } from '../document.model';
+import { DocumentService } from '../services/merchant/uploadDoc.service';
+import { Document } from '../shared/models/document.model';
 import { forwardRef } from "@angular/core";
-import { Merchant } from '../merchant.model';
-import { MerchantService } from '../merchant.service';
+import { UnapprovedMerchant } from '../shared/models/unapprovedMerchant.model';
+import { UnapprovedMerchantService } from '../services/merchant/unapprovedMerchant.service';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatButton } from '@angular/material/button';
 
@@ -62,7 +62,7 @@ export class AppMerchantRegistrationDialog {
 
 })
 export class MerchantRegForm {
-  constructor(public dialog: MatDialog, public merchantService: MerchantService, public documentService: DocumentService){// Instance:type of service defined
+  constructor(public dialog: MatDialog, public merchantService: UnapprovedMerchantService, public documentService: DocumentService){// Instance:type of service defined
   }
 
   emailFormControl = new FormControl('', [Validators.required, Validators.email]);

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { LoginService } from '../services/login/login.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import {MatDialog} from '@angular/material/dialog';
-import { AppMerchantRegistrationDialog } from '../merchant/merchant-registration/merchant-registration.component';
+import { AppMerchantRegistrationDialog } from '../merchant-registration/merchant-registration.component';
 import { Subscription } from 'rxjs';
 
 @Component({

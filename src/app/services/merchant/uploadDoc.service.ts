@@ -1,4 +1,4 @@
-import {Document} from './document.model'; //get post model
+import {Document} from '../../shared/models/document.model'; //get post model
 import {Injectable} from '@angular/core';
 
 @Injectable({providedIn: 'root'})

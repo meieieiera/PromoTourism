@@ -33,7 +33,7 @@ import { MatButton } from '@angular/material/button';
     ReactiveFormsModule, 
     NgIf,
     MatExpansionModule,
-    forwardRef(() => MerchantRegForm)],
+    forwardRef(() => MerchantRegForm)]
 
 })
 export class AppMerchantRegistrationDialog {
@@ -67,6 +67,22 @@ export class MerchantRegForm {
 
   emailFormControl = new FormControl('', [Validators.required, Validators.email]);
 
+  onMerchantSignup(form:NgForm){
+    const mDoc: Document[] = [{
+      name: 'doc1',
+      description: 'doc1 description',
+    },
+    {
+      name: 'doc2',
+      description: 'doc2 description',
+    }]
+
+    if(form.invalid){
+      return;
+    }
+
+    this.merchantService.merchantRegistration(form.value.name, form.value.contactNum, form.value.email, form.value.description, mDoc);
+  }
 
   openDialog2() {
     this.dialog.open(UploadDocDialog);

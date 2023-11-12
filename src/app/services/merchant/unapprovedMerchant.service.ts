@@ -26,13 +26,18 @@ export class UnapprovedMerchantService { //create a service class
     }*/
 
     merchantRegistration(name: string, contactNum: string, email: string, desc: string, document: Document[]){
+        console.log("kinda works")
         const regData: UnapprovedMerchant = {
             name: name, contactNum: contactNum, email: email, description: desc, documents: document, status: 'PENDING',
             id: UnapprovedMerchant._id
         };
-        this.http.post('http://localhost:3000/api/unapprovedMerchant/register', regData)
+        console.log(regData.contactNum + "wow it worked");
+        this.http.post('http://localhost:3000/api/unapprovedMerchant', regData)
         .subscribe(response =>{
-          console.log(response);
+          console.log(response),
+          error => {
+            console.error('Error:', error);
+          };
         });
       }
 }

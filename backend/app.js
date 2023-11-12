@@ -344,14 +344,47 @@ app.post('/api/unapprovedMerchant', (req, res, next) => {
     contactNum: req.body.contactNum,
     email: req.body.email,
     description: req.body.description,
+    documents: req.body.documents || [],  // Fix typo here: 'documents' instead of 'doucments'
+    merchantId: unapprovedMerchant._id.toString(),
+    status: 'PENDING'
+  });
+
+  unapprovedMerchant.save()
+    .then((savedMerchant) => {
+      console.log('merchant created below');
+      savedMerchant.merchantId = savedMerchant._id.toString();
+      res.status(201).json({
+        message: 'Merchant registered',
+        createdMerchant: savedMerchant  // Optionally send the saved merchant back in the response
+      });
+    })
+    .catch(error => {
+      console.error('Error registering merchant:', error);
+      res.status(500).json({
+        error: 'Internal Server Error'
+      });
+    });
+});
+
+
+/*app.post('/api/unapprovedMerchant', (req, res, next) => {
+  console.log("merchant name from backend below");
+  console.log(req.body.name);
+
+  const unapprovedMerchant = new UnapprovedMerchant({
+    name: req.body.name,
+    contactNum: req.body.contactNum,
+    email: req.body.email,
+    description: req.body.description,
     doucments: req.body.documents || [],
     merchantId:unapprovedMerchant._id.toString(),
     status: 'PENDING'
   });
-  unapprovedMerchant.save();
+  return unapprovedMerchant;
+  //unapprovedMerchant.save();
 
-  /*unapprovedMerchant.save()
-    .then(() => {
+  unapprovedMerchant.save()
+    .then((unapprovedMerchant) => {
       console.log('merchant created below');
       res.status(201).json({
         message: 'Merchant registered'
@@ -362,8 +395,8 @@ app.post('/api/unapprovedMerchant', (req, res, next) => {
       res.status(500).json({
         error: 'Internal Server Error'
       });
-    });*/
-});
+    });
+});*/
 
 
 

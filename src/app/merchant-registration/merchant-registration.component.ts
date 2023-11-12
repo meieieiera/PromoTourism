@@ -82,6 +82,7 @@ export class MerchantRegForm {
     }
 
     this.merchantService.merchantRegistration(form.value.name, form.value.contactNum, form.value.email, form.value.description, mDoc);
+    console.log(form.value.name + "\n" + form.value.contactNum + "\n" + form.value.email + "\n" +form.value.description + "\n" + mDoc.length);
   }
 
   openDialog2() {

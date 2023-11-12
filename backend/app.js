@@ -5,10 +5,12 @@ const Customer=require('./models/customer');
 const Merchant=require('./models/merchants');
 const Tour=require('./models/tour');
 const User=require('./models/user');
+const UnapprovedMerchant=require('./models/unapprovedMerchant');
 
 const bcrypt=require("bcrypt");
 const jwt=require('jsonwebtoken');
 const checkAuth=require("./middleware/check-auth");
+const mongooseUniqueValidator = require('mongoose-unique-validator');
 
 const app=express();
 
@@ -329,6 +331,38 @@ app.put('/api/updateAnalysis',(req,res,next)=>{
       console.error('Error updating analysis:', error);
       res.status(500).json({
         message: 'Error updating analysis',
+      });
+    });
+});
+
+//register Merchant 
+UnapprovedMerchant.plugin(uniqueValidator);
+
+app.post('/api/registerMerchant', (req, res, next) => {
+  console.log("merchant name from backend below");
+  console.log(req.body.name);
+
+  const unapprovedMerchant = new UnapprovedMerchant({
+    name: req.body.name,
+    contactNum: req.body.contactNum,
+    email: req.body.email,
+    description: req.body.description,
+    doucments: req.body.documents || [],
+    merchantId:unapprovedMerchant._id.toString(),
+    status: 'PENDING'
+  });
+
+  unapprovedMerchant.save()
+    .then(() => {
+      console.log('merchant created below');
+      res.status(201).json({
+        message: 'Merchant registered'
+      });
+    })
+    .catch(error => {
+      console.error('Error registering merchant:', error);
+      res.status(500).json({
+        error: 'Internal Server Error'
       });
     });
 });

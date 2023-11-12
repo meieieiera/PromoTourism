@@ -1,4 +1,4 @@
-export interface Document {
+export interface MerchantDocument {
     name: String;
     description: String;
 }

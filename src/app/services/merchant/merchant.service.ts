@@ -4,6 +4,8 @@ import { MerchantList } from 'src/app/merchant-list/merchant-list.component';
 import { Merchant } from 'src/app/shared/models/merchant.model';
 import { HttpClient } from '@angular/common/http';
 import { NgForm } from '@angular/forms';
+import { MerchantDocument } from 'src/app/shared/models/merchantDocument.model'
+import { UnapprovedMerchant } from 'src/app/shared/models/unapprovedMerchant.model';
 
 @Injectable({
   providedIn: 'root'
@@ -14,6 +16,8 @@ export class MerchantService {
   private selectedRowData = new BehaviorSubject<Merchant| null>(null);
 
   constructor(private http:HttpClient) { }
+
+  private documents: MerchantDocument[] = []; 
 
   setSelectedRowData(data: Merchant| null) {
     this.selectedRowData.next(data);
@@ -57,7 +61,14 @@ export class MerchantService {
       return this.merchantsUpdated.asObservable();
     }
 
-    onMerchantSignup(form: NgForm){
-      console.log(form.value)
+    merchantRegistration(name: string, contactNum: string, email: string, desc: string, document: MerchantDocument[]){
+      const regData: UnapprovedMerchant = {
+        name: name, contactNum: contactNum, email: email, description: desc, documents: document, status: 'PENDING',
+        _id: UnapprovedMerchant._id
+      };
+      this.http.post('http://localhost:3000/api/', regData)
+      .subscribe(response =>{
+        console.log(response);
+      });
     }
 }

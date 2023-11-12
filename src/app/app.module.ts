@@ -22,6 +22,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { MerchantListComponent } from './merchant-list/merchant-list.component';
 import { ReportComponent } from './report/report.component';
 import { NgApexchartsModule } from "ng-apexcharts";
+import { MatDividerModule } from '@angular/material/divider';
+
 //meira
 import { AppMerchantRegistrationDialog } from './merchant-registration/merchant-registration.component';
 import { PendingApprovalComponent } from './officer/approve-merchants/pending-approval.component';
@@ -29,6 +31,8 @@ import { ManageProductsComponent } from './merchant/manage-products/manage-produ
 import { RegisterCustomerDialog } from './register-customer/register-customer.component';
 import { HttpClientModule } from '@angular/common/http';
 import { TourService } from './services/tour/tour.service';
+import { MerchantRegForm } from './merchant-registration/merchant-registration.component';
+import { DisplayDocList } from './merchant-registration/merchant-registration.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +46,10 @@ import { TourService } from './services/tour/tour.service';
     PaymentComponent,
     ReviewListComponent,
     MerchantListComponent,
-    ReportComponent
+    ReportComponent,
+    AppMerchantRegistrationDialog,
+    MerchantRegForm,
+    DisplayDocList
     
   ],
   imports: [
@@ -55,11 +62,11 @@ import { TourService } from './services/tour/tour.service';
     FormsModule,
     NgbModule,
     NgApexchartsModule,
-    AppMerchantRegistrationDialog,
     PendingApprovalComponent,
     ManageProductsComponent,
     RegisterCustomerDialog,
-    HttpClientModule
+    HttpClientModule,
+    MatDividerModule
   ],
   providers: [TourService],
   bootstrap: [AppComponent]

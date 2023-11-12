@@ -11,7 +11,7 @@ import { CommonModule } from '@angular/common';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {NgForm} from '@angular/forms';
 import { DocumentService } from '../../services/merchant/uploadDoc.service'; 
-import { Document } from '../../services/merchant/document.model';
+import { Document } from '../../shared/models/merchantDocument.model';
 import { forwardRef } from "@angular/core";
 import { Merchant } from '../merchant.model';
 import { MerchantService } from '../merchant.service';

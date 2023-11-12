@@ -1,10 +1,12 @@
-import { MerchantDocument } from "../shared/models/merchantDocument.model";
+import { MerchantDocument } from "./merchantDocument.model";
 
-export interface Merchant {
+export class UnapprovedMerchant{
     name: string;
     contactNum: string;
     email: string;
     description: string;
     documents: MerchantDocument[];
     status: string;
+    _id:string;
+  static _id: string;
 }

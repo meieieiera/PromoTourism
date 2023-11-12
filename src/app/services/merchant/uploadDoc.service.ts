@@ -1,10 +1,10 @@
-import {Document} from './document.model'; //get post model
+import {MerchantDocument} from '../../shared/models/merchantDocument.model'; //get post model
 import {Injectable} from '@angular/core';
 
 @Injectable({providedIn: 'root'})
 
 export class DocumentService { //create a service class
-    private documents: Document[] = []; // set type to Post array(model)
+    private documents: MerchantDocument[] = []; // set type to Post array(model)
 
     //to retrieve the post 
     getDocument(){
@@ -13,7 +13,7 @@ export class DocumentService { //create a service class
 
     // to add a post 
     addDocument(name: string, description: string){
-        const document: Document = {name: name, description: description}; // varialbe storing values of post
+        const document: MerchantDocument = {name: name, description: description}; // varialbe storing values of post
         this.documents.push(document); // push the new post into posts array
     }
 

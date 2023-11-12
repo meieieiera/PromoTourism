@@ -1,7 +1,7 @@
 <div id="uploadDocTitle">Uploaded Documents<div>
 
-<mat-accordion multi="true" *ngIf="documents.length>0">
-    <mat-expansion-panel *ngFor="let doc of documents">
+<mat-accordion multi="true" *ngIf="merchantDocuments.length>0">
+    <mat-expansion-panel *ngFor="let doc of merchantDocuments">
         <mat-expansion-panel-header>
             {{doc.name}}
         </mat-expansion-panel-header>
@@ -10,4 +10,4 @@
     </mat-expansion-panel>
 </mat-accordion>
 
-<p id="noPost" *ngIf="documents.length==0">No documents added yet</p>
+<p id="noPost" *ngIf="merchantDocuments.length==0">No documents added yet</p>

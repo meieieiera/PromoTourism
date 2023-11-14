@@ -17,6 +17,7 @@ import { UnapprovedMerchant } from '../shared/models/unapprovedMerchant.model';
 import { UnapprovedMerchantService } from '../services/merchant/unapprovedMerchant.service';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatButton } from '@angular/material/button';
+import {FormGroup} from "@angular/forms";  
 
 @Component({
   selector: 'app-merchant-registration-dialog',
@@ -68,14 +69,7 @@ export class MerchantRegForm {
   emailFormControl = new FormControl('', [Validators.required, Validators.email]);
 
   onMerchantSignup(form:NgForm){
-    const mDoc: Document[] = [{
-      name: 'doc1',
-      description: 'doc1 description',
-    },
-    {
-      name: 'doc2',
-      description: 'doc2 description',
-    }]
+    const mDoc: Document[] = this.documentService.getDocumentArray();
 
     if(form.invalid){
       return;
@@ -83,6 +77,7 @@ export class MerchantRegForm {
 
     this.merchantService.merchantRegistration(form.value.name, form.value.contactNum, form.value.email, form.value.description, mDoc);
     console.log(form.value.name + "\n" + form.value.contactNum + "\n" + form.value.email + "\n" +form.value.description + "\n" + mDoc.length);
+    this.documentService.resetDocumentArray();
   }
 
   openDialog2() {
@@ -119,12 +114,16 @@ export class MerchantRegForm {
         MatIconModule,
         ReactiveFormsModule,
         NgIf,
-        MatExpansionModule, forwardRef(() => DisplayDocList),
+        MatExpansionModule, 
+        forwardRef(() => DisplayDocList)
       ]
 })
 export class UploadDocDialog{
-  enteredName='';
-    enteredDescription='';
+  title='';
+    description='';
+    selectedFile: File | null = null;
+    
+
 
     constructor(public documentService: DocumentService, public dialog: MatDialog){// Instance:type of service defined
     }
@@ -132,24 +131,45 @@ export class UploadDocDialog{
     openDialog() {
       this.dialog.open(AppMerchantRegistrationDialog);
     }
-    
+
+    onFileSelected(event: any) {
+      this.selectedFile = event.target.files[0];
+      if (this.selectedFile) {
+        // Here, you can perform actions with the selected file, such as uploading it to a server.
+        console.log('Selected File:', this.selectedFile);
+      }
+    }
+
     onAddDoc(form: NgForm){
+      const formData = new FormData;
+      formData.append('file', this.selectedFile);
+
       if (form.invalid){
           return;
       }
-      this.documentService.addDocument(form.value.name, form.value.description);
+      this.documentService.addDocument(form.value.name, form.value.description, formData);
       form.resetForm();
-
     }
+
+
+
+
   
-    onFileSelected(event: any) {
-      const selectedFile = event.target.files[0];
+/*    onFileSelected(event: Event) {
+      const selectedFile = (event.target as HTMLInputElement).files[0];
+      this.form.patchValue({document: file});  
+      this.form.get('document').updateValueAndValidity();  
+      const reader = new FileReader();  
+      reader.onload = ()=>{  
+        this.Pickedimage = reader.result as string;  
+      };  
+      reader.readAsDataURL(file);  
   
       if (selectedFile) {
         // Here, you can perform actions with the selected file, such as uploading it to a server.
         console.log('Selected File:', selectedFile);
       }
-    }
+    }*/
   }
 
 

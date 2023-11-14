@@ -23,7 +23,7 @@
     <div>
       <mat-form-field class="">
         <mat-label>Merchant Description</mat-label>
-        <textarea matInput type="text" ngModel name="description" #description="ngModel"></textarea>
+        <textarea matInput required type="text" ngModel name="description" #description="ngModel"></textarea>
       </mat-form-field>
     </div>
     <button mat-button (click)="openDialog2()" mat-dialog-close id="addDocBtn">Add Documents</button>
@@ -31,7 +31,7 @@
 <br>
     <mat-divider></mat-divider>
 <div id="btnCollection">
-  <button mat-dialog-close=""
+  <button
   mat-flat-button 
   color="accent"
   type="submit">Submit</button>

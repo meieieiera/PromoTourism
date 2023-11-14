@@ -11,6 +11,11 @@ const bcrypt=require("bcrypt");
 const jwt=require('jsonwebtoken');
 const checkAuth=require("./middleware/check-auth");
 const shortid = require('shortid');
+const generator = require('generate-password');
+const multer = require("multer");  
+const storage = multer.memoryStorage();
+const upload = multer({ storage: storage });
+
 
 
 const app=express();
@@ -353,19 +358,25 @@ app.put('/api/updateAnalysis',(req,res,next)=>{
       });
   });
 
-//register Merchant 
-app.post('/api/unapprovedMerchant', (req, res, next) => {
+//register Unapproved Merchant 
+app.post('/api/unapprovedMerchant', upload.array('documents'), (req, res, next) => {
   console.log("merchant name from backend below");
   console.log(req.body.name);
+
   const mId = shortid.generate();
   console.log(mId);
+
+  const files = req.files; // Access the array of files
+
+  // Do something with the array of files
+
   const unapprovedMerchant = new UnapprovedMerchant({
     id: mId,
     name: req.body.name,
     contactNum: req.body.contactNum,
     email: req.body.email,
     description: req.body.description,
-    documents: req.body.documents || [],  // Fix typo here: 'documents' instead of 'doucments'
+    documents: files || [],
     status: 'PENDING'
   });
 
@@ -374,7 +385,7 @@ app.post('/api/unapprovedMerchant', (req, res, next) => {
       console.log('merchant created below');
       res.status(201).json({
         message: 'Merchant registered',
-        createdMerchant: savedMerchant  // Optionally send the saved merchant back in the response
+        createdMerchant: savedMerchant
       });
     })
     .catch(error => {
@@ -386,28 +397,46 @@ app.post('/api/unapprovedMerchant', (req, res, next) => {
 });
 
 
-/*app.post('/api/unapprovedMerchant', (req, res, next) => {
-  console.log("merchant name from backend below");
-  console.log(req.body.name);
+//upload file 
+ 
 
-  const unapprovedMerchant = new UnapprovedMerchant({
-    name: req.body.name,
-    contactNum: req.body.contactNum,
-    email: req.body.email,
-    description: req.body.description,
-    doucments: req.body.documents || [],
-    merchantId:unapprovedMerchant._id.toString(),
-    status: 'PENDING'
-  });
-  return unapprovedMerchant;
-  //unapprovedMerchant.save();
-
-  unapprovedMerchant.save()
-    .then((unapprovedMerchant) => {
-      console.log('merchant created below');
+//Create Merchant Login 
+app.post('/api/registerMerchant',(req,res,next)=>{
+  console.log("email from backend below")
+  console.log(req.body.email);
+  const password = generator.generate({ 
+    length: 10, 
+    numbers: true
+}); 
+  bcrypt.hash(password,10)
+  .then(hash=>{
+    const user = new User({
+      email:req.body.email,
+      password:hash,
+      userType:'merchant'
+    });
+    user.save().then(user=>{
+      console.log('merchant user created below')
+      console.log(user)
+    })
+    return user
+  })
+  .then(user=>{
+    const merchant = new Merchant({
+      id: uniq,
+      name:req.body.name,
+      number:req.body.number,
+      description:req.body.description,
+      documents:req.body.documents || [],
+      tours:[],
+      userId:user._id.toString(),//reference to user
+      productsSold:0,
+      revenue:0
+    });
+    merchant.save().then(merchant=>{
       res.status(201).json({
-        message: 'Merchant registered'
-      });
+        message:'Merchant registered'
+      })
     })
     .catch(error => {
       console.error('Error registering merchant:', error);
@@ -415,7 +444,8 @@ app.post('/api/unapprovedMerchant', (req, res, next) => {
         error: 'Internal Server Error'
       });
     });
-});*/
+  })
+})
 
 
 

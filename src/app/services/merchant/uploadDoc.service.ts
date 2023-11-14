@@ -12,9 +12,9 @@ export class DocumentService { //create a service class
     }
 
     // to add a post 
-    addDocument(name: string, description: string){
-        const document: Document = {name: name, description: description}; // varialbe storing values of post
-        this.documents.push(document); // push the new post into posts array
+    addDocument(name: string, description: string, formData: FormData){
+        const document: Document = {name: name, description: description, formData: formData}; // varialbe storing values of post
+        this.documents.push(document); // push the new doc into doc array
     }
 
     // Function that returns an array of Document
@@ -25,4 +25,8 @@ export class DocumentService { //create a service class
   
   // Calling the function to get the array of Document
     documentArray: Document[] = this.getDocumentArray();
+
+    resetDocumentArray(){
+        this.documents = [];
+    }
 }

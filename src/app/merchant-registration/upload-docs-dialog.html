@@ -9,18 +9,22 @@
   
 
   <div>
-    <mat-form-field class="">
+    <mat-form-field>
       <mat-label>Description</mat-label>
       <textarea matInput ngModel name="description" #description="ngModel"></textarea>
     </mat-form-field>
   </div>
 
-<div>
-  <input mat-input type="file" id="uploadDoc" (change)="onFileSelected($event)" accept=".pdf, .jpg, .png" />
+  <div>
+    <button mat-stroked-button type="button" (click)="filepicker.click()">Upload Document</button>
+    <input type="file" (change)="onFileSelected($event)" #filepicker ngModel name="document">
+      </div>
 
-  </div>
+<!--<div>
+  <input mat-input type="file" id="uploadDoc" #filepicker (change)="onFileSelected($event)" accept=".pdf, .jpg, .png, .jpeg" />
+
+  </div>-->
   
-
   <button 
   mat-flat-button 
   color="accent" 

@@ -44,3 +44,7 @@ mat-divider{
 #noPost{
     padding-top: 10px;
 }
+
+input[type='file']{  
+    visibility: hidden;  
+  }  

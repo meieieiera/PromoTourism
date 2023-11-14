@@ -7,5 +7,4 @@ export class UnapprovedMerchant {
     description: string;
     documents: Document[];
     status: string;
-    static _id: string;
 }

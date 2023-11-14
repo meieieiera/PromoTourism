@@ -29,7 +29,7 @@ export class UnapprovedMerchantService { //create a service class
         console.log("kinda works")
         const regData: UnapprovedMerchant = {
             name: name, contactNum: contactNum, email: email, description: desc, documents: document, status: 'PENDING',
-            id: UnapprovedMerchant._id
+            id: ''
         };
         console.log(regData.contactNum + "wow it worked");
         this.http.post('http://localhost:3000/api/unapprovedMerchant', regData)

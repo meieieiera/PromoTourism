@@ -5,11 +5,13 @@ const Customer=require('./models/customer');
 const Merchant=require('./models/merchants');
 const Tour=require('./models/tour');
 const User=require('./models/user');
-const UnapprovedMerchant=require('./models/unapprovedMerchant')
+const UnapprovedMerchant=require('./models/unapprovedMerchants')
 
 const bcrypt=require("bcrypt");
 const jwt=require('jsonwebtoken');
 const checkAuth=require("./middleware/check-auth");
+const shortid = require('shortid');
+
 
 const app=express();
 
@@ -334,25 +336,42 @@ app.put('/api/updateAnalysis',(req,res,next)=>{
     });
 });
 
+  //get all unapprovedMerchants
+  app.get("/api/unapprovedMerchant", (req, res, next) => {
+    UnapprovedMerchant.find()
+      .then((unapprovedMerchants) => {
+        res.status(200).json({
+          message: 'Unapproved merchants fetched successfully',
+          unapprovedMerchant: unapprovedMerchants
+        });
+      })
+      .catch((error) => {
+        console.error('Error fetching unapproved merchants:', error);
+        res.status(500).json({
+          message: 'Error fetching unapproved merchants'
+        });
+      });
+  });
+
 //register Merchant 
 app.post('/api/unapprovedMerchant', (req, res, next) => {
   console.log("merchant name from backend below");
   console.log(req.body.name);
-
+  const mId = shortid.generate();
+  console.log(mId);
   const unapprovedMerchant = new UnapprovedMerchant({
+    id: mId,
     name: req.body.name,
     contactNum: req.body.contactNum,
     email: req.body.email,
     description: req.body.description,
     documents: req.body.documents || [],  // Fix typo here: 'documents' instead of 'doucments'
-    merchantId: unapprovedMerchant._id.toString(),
     status: 'PENDING'
   });
 
   unapprovedMerchant.save()
     .then((savedMerchant) => {
       console.log('merchant created below');
-      savedMerchant.merchantId = savedMerchant._id.toString();
       res.status(201).json({
         message: 'Merchant registered',
         createdMerchant: savedMerchant  // Optionally send the saved merchant back in the response

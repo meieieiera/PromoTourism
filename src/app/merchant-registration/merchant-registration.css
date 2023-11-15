@@ -28,7 +28,7 @@ mat-divider{
 }
 
 #uploadDoc{
-    margin-right: 5px;
+    
     padding-bottom: 10px;
     font-family: Georgia, 'Times New Roman', Times, serif;
 }
@@ -43,8 +43,19 @@ mat-divider{
 
 #noPost{
     padding-top: 10px;
+    font-size: small;
+    text-align: center;
+
 }
 
 input[type='file']{  
     visibility: hidden;  
+    width: 0px;
+    padding-right: 10px;
   }  
+
+.flex-container{
+    display: flex;
+    padding-bottom: 10px;
+}
+

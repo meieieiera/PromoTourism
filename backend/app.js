@@ -14,7 +14,7 @@ const shortid = require('shortid');
 const generator = require('generate-password');
 const multer = require("multer");  
 const storage = multer.memoryStorage();
-const upload = multer({ storage: storage });
+const upload = multer({ dest: 'uploads/' });
 
 
 
@@ -358,43 +358,40 @@ app.put('/api/updateAnalysis',(req,res,next)=>{
       });
   });
 
-//register Unapproved Merchant 
-app.post('/api/unapprovedMerchant', upload.array('documents'), (req, res, next) => {
-  console.log("merchant name from backend below");
-  console.log(req.body.name);
-
-  const mId = shortid.generate();
-  console.log(mId);
-
-  const files = req.files; // Access the array of files
-
-  // Do something with the array of files
-
-  const unapprovedMerchant = new UnapprovedMerchant({
-    id: mId,
-    name: req.body.name,
-    contactNum: req.body.contactNum,
-    email: req.body.email,
-    description: req.body.description,
-    documents: files || [],
-    status: 'PENDING'
-  });
-
-  unapprovedMerchant.save()
-    .then((savedMerchant) => {
-      console.log('merchant created below');
-      res.status(201).json({
-        message: 'Merchant registered',
-        createdMerchant: savedMerchant
-      });
-    })
-    .catch(error => {
-      console.error('Error registering merchant:', error);
-      res.status(500).json({
-        error: 'Internal Server Error'
-      });
+  app.post('/api/unapprovedMerchant', upload.array('documents'), (req, res, next) => {
+    const mId = shortid.generate();
+  
+    const files = req.body.documents; // Use req.files instead of req.body.documents
+  
+    const unapprovedMerchant = new UnapprovedMerchant({
+      id: mId,
+      name: req.body.name,
+      contactNum: req.body.contactNum,
+      email: req.body.email,
+      description: req.body.description,
+      documents: files.map(file => ({
+        name: file.name,
+        description: file.description || '', // Add a default value for description
+        fileReference: 'uploads/'+ file.name + Date().toString().replace(/\s/g, "")
+      })),
+      status: 'PENDING',
     });
-});
+  
+    unapprovedMerchant.save()
+      .then((savedMerchant) => {
+        console.log('Merchant created below');
+        res.status(201).json({
+          message: 'Merchant registered',
+          createdMerchant: savedMerchant,
+        });
+      })
+      .catch(error => {
+        console.error('Error registering merchant:', error);
+        res.status(500).json({
+          error: 'Internal Server Error',
+        });
+      });
+  });
 
 
 //upload file 

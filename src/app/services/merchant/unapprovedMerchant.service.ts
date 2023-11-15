@@ -25,7 +25,9 @@ export class UnapprovedMerchantService { //create a service class
         this.merchants.push(merchant); // push the new post into posts array
     }*/
 
+
     merchantRegistration(name: string, contactNum: string, email: string, desc: string, document: Document[]){
+    
         console.log("kinda works")
         const regData: UnapprovedMerchant = {
             name: name, contactNum: contactNum, email: email, description: desc, documents: document, status: 'PENDING',

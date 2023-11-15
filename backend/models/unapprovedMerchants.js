@@ -3,8 +3,8 @@ const uniqueValidator = require('mongoose-unique-validator');
 
 const documentSchema=mongoose.Schema({
     name:{type:String,required:true},
-    description:{type:String,required:true}
-    //file:{type:String,required:true}
+    description:{type:String,required:true},
+    fileReference: { type: String, required: true }
 });
 
 const unapprovedMerchantSchema = mongoose.Schema({

@@ -3,7 +3,7 @@ const mongoose=require('mongoose');
 const documentSchema=mongoose.Schema({
     name:{type:String,required:true},
     description:{type:String,required:true},
-    file:{type:String,required:true}
+    file:{type:Buffer,required:true}
 });
 const merchantSchema=mongoose.Schema({
     id:{type:Number,required:true},

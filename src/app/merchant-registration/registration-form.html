@@ -26,13 +26,43 @@
         <textarea matInput required type="text" ngModel name="description" #description="ngModel"></textarea>
       </mat-form-field>
     </div>
-    <button mat-button (click)="openDialog2()" mat-dialog-close id="addDocBtn">Add Documents</button>
-<br>
-<br>
+    <!--<button mat-button (click)="openDialog2()" mat-dialog-close id="addDocBtn">Add Documents</button>-->
+
     <mat-divider></mat-divider>
+
+    <p>Please upload all supporting documents</p>
+    <form (submit)="onAddDoc(uploadDoc)" #uploadDoc="ngForm">
+  <mat-form-field>
+    <mat-label>Document Name: </mat-label>
+    <input matInput required ngModel type="text" name="name" #name="ngModel">
+  </mat-form-field>
+  
+
+  <div>
+    <mat-form-field>
+      <mat-label>Description</mat-label>
+      <textarea matInput ngModel name="description" #description="ngModel"></textarea>
+    </mat-form-field>
+  </div>
+
+  <div class="flex-container">
+    <div>
+      <button mat-stroked-button type="button" (click)="filepicker.click()">Upload Document</button>
+      <input type="file" (change)="onFileSelected($event)" #filepicker ngModel name="document">
+    </div>
+    <button class="addDoc" mat-flat-button color="primary" type="submit">Add Document</button>
+  </div>
+  </form>
+
+  <mat-divider></mat-divider>
+<doc-list></doc-list>
+  
+
+<mat-divider></mat-divider>
 <div id="btnCollection">
   <button
   mat-flat-button 
+  mat-dialog-close
   color="accent"
   type="submit">Submit</button>
 

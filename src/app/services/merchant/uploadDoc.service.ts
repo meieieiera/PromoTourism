@@ -12,19 +12,31 @@ export class DocumentService { //create a service class
     }
 
     // to add a post 
-    addDocument(name: string, description: string, formData: FormData){
-        const document: Document = {name: name, description: description, formData: formData}; // varialbe storing values of post
+    addDocument(name: string, description: string, file: File){
+        const document: Document = {name: name, description: description, file: file}; // varialbe storing values of post
         this.documents.push(document); // push the new doc into doc array
     }
 
     // Function that returns an array of Document
     getDocumentArray(): Document[] {
-    // Implementation to fetch and return documents
-    return [];
-  }
+        return this.documents.slice();
+      }
+    /*getDocumentArray(): FormData {
+        const formData = new FormData();
+        for (let i = 0; i < this.documents.length; i++) {
+            const document = this.documents[i];
+            
+            // Append each document's data to the FormData
+            formData.append(`documents[${i}][title]`, document.name);
+            formData.append(`documents[${i}][description]`, document.description);
+            formData.append(`documents[${i}][file]`, document.formData.get('file') || '');
+          }
+        return formData; // return a copy of the array
+      }*/
+      
   
   // Calling the function to get the array of Document
-    documentArray: Document[] = this.getDocumentArray();
+    //documentArray: Document[] = this.getDocumentArray();
 
     resetDocumentArray(){
         this.documents = [];

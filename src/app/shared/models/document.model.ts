@@ -1,5 +1,5 @@
 export class Document {
-    name: String;
-    description: String;
-    formData: FormData
+    name: string;
+    description: string;
+    file: File
 }

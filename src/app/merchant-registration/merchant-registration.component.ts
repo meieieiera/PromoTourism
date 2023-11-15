@@ -59,7 +59,8 @@ export class AppMerchantRegistrationDialog {
     ReactiveFormsModule, 
     NgIf,
     MatExpansionModule,
-    MatDividerModule]
+    MatDividerModule,
+    forwardRef(() => DisplayDocList)]
 
 })
 export class MerchantRegForm {
@@ -69,8 +70,10 @@ export class MerchantRegForm {
   emailFormControl = new FormControl('', [Validators.required, Validators.email]);
 
   onMerchantSignup(form:NgForm){
-    const mDoc: Document[] = this.documentService.getDocumentArray();
 
+  const mDoc: Document[] = this.documentService.getDocumentArray();
+  console.log("Docs: " + mDoc.length);
+    
     if(form.invalid){
       return;
     }
@@ -83,6 +86,38 @@ export class MerchantRegForm {
   openDialog2() {
     this.dialog.open(UploadDocDialog);
   }
+
+  title='';
+  description='';
+  selectedFile: File | null = null;
+  
+  /*openDialog() {
+    this.dialog.open(AppMerchantRegistrationDialog);
+  }*/
+
+  onFileSelected(event: any) {
+    this.selectedFile = event.target.files[0];
+    if (this.selectedFile) {
+      // Here, you can perform actions with the selected file, such as uploading it to a server.
+      console.log('Selected File:', this.selectedFile);
+    }
+
+    const formData = new FormData();
+    formData.append('file', this.selectedFile);
+  }
+
+  onAddDoc(form: NgForm){
+    //const formData = new FormData;
+    //formData.append('documents', this.selectedFile);
+
+    if (form.invalid){
+        return;
+    }
+    this.documentService.addDocument(form.value.name, form.value.description, form.value.file);
+    form.resetForm();
+  }
+
+
 
 /*  onAddMerchant(form: NgForm){
     if (form.invalid){
@@ -147,7 +182,7 @@ export class UploadDocDialog{
       if (form.invalid){
           return;
       }
-      this.documentService.addDocument(form.value.name, form.value.description, formData);
+      this.documentService.addDocument(form.value.name, form.value.description, form.value.document);
       form.resetForm();
     }
 

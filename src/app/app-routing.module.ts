@@ -13,7 +13,7 @@ import { MenubarComponent } from './menubar/menubar.component';
 //meira
 import { AppMerchantRegistrationDialog } from './merchant-registration/merchant-registration.component';
 import { PendingApprovalComponent } from './officer/approve-merchants/pending-approval.component';
-import { ManageProductsComponent } from './merchant/manage-products/manage-products.component';
+import { ManageProductsComponent } from './manage-products/manage-products.component';
 import { RegisterCustomerDialog } from './register-customer/register-customer.component';
 
 const routes: Routes=[

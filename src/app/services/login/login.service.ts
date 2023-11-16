@@ -11,6 +11,7 @@ export class LoginService {
   private loggedIn=false;
   private userType='';
   private userId='';
+  private merchantId='';
   private usertypeSubject = new Subject<string>(); // Create a Subject
   private logoutSubject = new Subject<boolean>(); // Create a Subject for logout notification
   private userIdSubject = new Subject<string>();
@@ -76,6 +77,7 @@ export class LoginService {
   getUserId(){
     return this.userId;
   }
+
   setUserType(usertype: string) {
     this.userType = usertype;
     this.usertypeSubject.next(usertype); // Notify subscribers when usertype changes

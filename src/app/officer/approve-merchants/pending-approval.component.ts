@@ -99,18 +99,14 @@ export class PendingApprovalComponent {
       }
     }
 
-    openDialog() {
-      this.dialog.open(SaveDialog);
-
-}
-
   onDeleteMerchant(merchantId: string){
     this.unapprovedMerchantService.deleteMerchant(merchantId);
   }
 
   onApproveMerchant(id: string, name: string, num: string, email: string, desc: string, documents: Document[]) {
-    this.merchantService.addMerchant(id, name, num, email, desc, documents)
-    //this.unapprovedMerchantService.deleteMerchant(id);
+    this.merchantService.addMerchant(id, name, num, email, desc, documents);
+    this.unapprovedMerchantService.deleteMerchant(id);
+    this.dialog.open(SaveDialog);
   }
 }
 

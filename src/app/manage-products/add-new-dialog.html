@@ -1,6 +1,6 @@
 <h1 mat-dialog-title>Add a New Product</h1>
 <div mat-dialog-content>
-  <form #addNewProduct="ngForm">
+  <form (submit)="onSave(addNewProduct)" #addNewProduct="ngForm">
     <div>
       <mat-form-field>
         <mat-label>Product Name: </mat-label>
@@ -17,8 +17,8 @@
           
     <div>
       <mat-form-field floatLabel="always">
-        <mat-label>Amount</mat-label>
-        <input matInput required type="number" class="example-right-align" placeholder="0">
+        <mat-label>Price</mat-label>
+        <input matInput required type="number" name="price" #price="ngModel" class="example-right-align" placeholder="0">
         <span matTextPrefix>$&nbsp;</span>
         <span matTextSuffix>.00</span>
       </mat-form-field>
@@ -41,15 +41,13 @@
       <br>
 
   <div mat-dialog-actions>
-    <button mat-dialog-close=""
+    <button mat-dialog-close
     mat-flat-button 
     color="accent"
-    type="submit" (click)="onSave()">Add New</button>
+    type="submit">Add New</button>
   
   <button mat-dialog-close mat-flat-button id="close">Close</button>
   </div>
   
   </form>
   </div>
-
-  

@@ -25,7 +25,7 @@ import { NgApexchartsModule } from "ng-apexcharts";
 //meira
 import { AppMerchantRegistrationDialog } from './merchant-registration/merchant-registration.component';
 import { PendingApprovalComponent } from './officer/approve-merchants/pending-approval.component';
-import { ManageProductsComponent } from './merchant/manage-products/manage-products.component';
+import { ManageProductsComponent } from './manage-products/manage-products.component';
 import { RegisterCustomerDialog } from './register-customer/register-customer.component';
 import { HttpClientModule } from '@angular/common/http';
 import { TourService } from './services/tour/tour.service';

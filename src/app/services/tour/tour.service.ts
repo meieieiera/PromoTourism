@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import{Tour} from '../../shared/models/Tour.model';
 import{HttpClient}from '@angular/common/http';
-import{map}from 'rxjs/operators';
-import { Subject } from 'rxjs';
+import{map, tap}from 'rxjs/operators';
+import { Observable, Subject } from 'rxjs';
 import { reviewTour } from 'src/app/shared/models/reviewTour.model';
 import { Merchant } from 'src/app/shared/models/merchant.model';
 
@@ -13,6 +13,7 @@ export class TourService {
   private tours:Tour[]=[];
   private rTours:reviewTour[]=[];
   private toursUpdated = new Subject<Tour[]>();
+  private toursByMIdUpdate = new Subject<Tour[]>();
   private rToursUpdated = new Subject<reviewTour[]>();
   private merchant:Merchant;
   router: any;
@@ -128,6 +129,80 @@ export class TourService {
       console.log(response);
   });
   }
+
+// Modify the getAll method to accept a merchantId parameter
+getTourByMerchantId(merchantId: string): Observable<Tour[]>{
+// Modify the getAll method to accept a merchantId parameter
+  // Adjust the URL to include the merchantId
+  const url = `http://localhost:3000/api/tours?merchantId=${merchantId}`;
+
+  return this.http.get<{ message: string, tours: any }>(url)
+    .pipe(
+      map((tourData) => {
+        return tourData.tours.map(tour => {
+          return {
+            id: tour.id,
+            name: tour.name,
+            description: tour.description,
+            price: tour.price,
+            stars: tour.stars,
+            imageUrl: tour.imageUrl,
+            date: tour.date,
+            pax: tour.pax,
+            _id: tour._id
+          };
+        });
+      }),
+      tap(transformedPosts => {
+        this.tours = transformedPosts;
+        this.toursByMIdUpdate.next([...this.tours]);
+      })
+    );
+}
+
+getToursByMIdUpdateListener(){
+  return this.toursByMIdUpdate.asObservable();
+}
+
+deleteTour(tourId: number){
+  this.http.delete('http://localhost:3000/api/deleteTour/' + tourId)
+  .subscribe(()=>{
+    console.log('Deleted Tour');
+    const updatedTours = this.tours.filter(tour => tour.id !== tourId);
+    this.tours = updatedTours;
+    this.toursUpdated.next([...this.tours]);
+  })
+}
+
+updateTourProduct(tourData: any){
+  const url = 'http://localhost:3000/api/updateTourProduct';
+  return this.http.put(url, tourData).subscribe(response=>{
+    console.log(response);
+});
+}
+
+
+
+addTour(name: string, quantity: number, price: number, description: string, formData: FormData){
+  console.log("kinda works")
+        const regData: any = {
+          name: name,
+          description: description,
+          quantity: quantity,
+          price: price,
+          image: formData
+        };
+        console.log(regData.contactNum + "wow it worked");
+        this.http.post('http://localhost:3000/api/addTour', regData)
+        .subscribe(response =>{
+          console.log(response),
+          error => {
+            console.error('Error:', error);
+          };
+        });
+}
+
+
 
   }
   // addReviewTour(id:number,name:string,price:number,imageUrl:string,date:string,pax:number){

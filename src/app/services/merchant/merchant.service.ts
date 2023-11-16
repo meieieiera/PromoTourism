@@ -28,6 +28,7 @@ export class MerchantService {
     return this.http.get<{ message: string, merchant: Merchant }>('http://localhost:3000/api/merchant/' + userid)
       .pipe(map(response => response.merchant));
   }
+
   getAllMerchant(){
     this.http.get<{message:string,merchants:any}>('http://localhost:3000/api/merchants')
         .pipe(map((merchantData)=>{

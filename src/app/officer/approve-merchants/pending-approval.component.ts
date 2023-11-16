@@ -8,6 +8,11 @@ import {MatGridListModule} from '@angular/material/grid-list';
 import {MatTableModule} from '@angular/material/table';
 import { DomSanitizer } from '@angular/platform-browser';
 import { MatDialog } from '@angular/material/dialog';
+import { Observable, Subscription, map } from 'rxjs';
+import { UnapprovedMerchantService } from 'src/app/services/merchant/unapprovedMerchant.service';
+import { UnapprovedMerchant } from 'src/app/shared/models/unapprovedMerchant.model';
+import { MerchantService } from 'src/app/services/merchant/merchant.service';
+import { Document } from 'src/app/shared/models/document.model';
 
 export interface MerchantInformation {
   contactNum: string;
@@ -15,9 +20,9 @@ export interface MerchantInformation {
   description: string;
 }
 
-const ELEMENT_DATA: MerchantInformation[] = [
+/*const ELEMENT_DATA: MerchantInformation[] = [
   {contactNum: '+6012-34567890', email: 'customer@abcindustries.com', description: 'We are abc industies leading in sales of package trips to Thailand and Singapore'}
-];
+];*/
 
 /**
  * @title Basic use of `<table mat-table>`
@@ -40,18 +45,46 @@ const ELEMENT_DATA: MerchantInformation[] = [
 })
 
 export class PendingApprovalComponent {
+
   
-  constructor(public dialog: MatDialog, private sanitizer: DomSanitizer) {}
+  constructor(
+    public dialog: MatDialog,
+    private sanitizer: DomSanitizer, 
+    private unapprovedMerchantService: UnapprovedMerchantService, 
+    private merchantService: MerchantService
+    ) {}
   
     panelOpenState = false;
 
     displayedColumns: string[] = ['contactNum', 'email', 'description'];
-    dataSource = ELEMENT_DATA;
+    unapprovedMerchants: UnapprovedMerchant[] = [];
+    private merchantSub: Subscription|undefined;
 
     regCert;
 
 
     ngOnInit(){
+      this.merchantSub = this.unapprovedMerchantService.getAll()
+      .subscribe(
+        (merchants: UnapprovedMerchant[]) => {
+          this.unapprovedMerchants = merchants;
+        },
+        (error) => {
+          console.error('Error fetching merchants:', error);
+        }
+      );
+  
+    // Subscribe to updates
+    this.unapprovedMerchantService.getMerchantsUpdateListener()
+      .subscribe(
+        (merchants: UnapprovedMerchant[]) => {
+          this.unapprovedMerchants = merchants;
+        },
+        (error) => {
+          console.error('Error receiving updates:', error);
+        }
+      );
+
       const data = 'some text';
       const blob = new Blob([data], {
         type: 'application/octet-stream'
@@ -59,10 +92,26 @@ export class PendingApprovalComponent {
       this.regCert = this.sanitizer.bypassSecurityTrustResourceUrl(window.URL.createObjectURL(blob));
     }
 
+    ngOnDestroy() {
+      // Unsubscribe to prevent memory leaks
+      if (this.merchantSub) {
+        this.merchantSub.unsubscribe();
+      }
+    }
+
     openDialog() {
       this.dialog.open(SaveDialog);
 
 }
+
+  onDeleteMerchant(merchantId: string){
+    this.unapprovedMerchantService.deleteMerchant(merchantId);
+  }
+
+  onApproveMerchant(id: string, name: string, num: string, email: string, desc: string, documents: Document[]) {
+    this.merchantService.addMerchant(id, name, num, email, desc, documents)
+    //this.unapprovedMerchantService.deleteMerchant(id);
+  }
 }
 
 /**

@@ -3,6 +3,8 @@ import { BehaviorSubject, Observable, Subject, map } from 'rxjs';
 import { MerchantList } from 'src/app/merchant-list/merchant-list.component';
 import { Merchant } from 'src/app/shared/models/merchant.model';
 import { HttpClient } from '@angular/common/http';
+import { Tour } from 'src/app/shared/models/Tour.model';
+import { Document } from 'src/app/shared/models/document.model';
 
 @Injectable({
   providedIn: 'root'
@@ -54,5 +56,20 @@ export class MerchantService {
     }
     getMerchantsUpdateListener(){
       return this.merchantsUpdated.asObservable();
+    }
+
+    addMerchant(id: string, name: string, number: string, email: string, desc: string, documents: Document[]){
+      console.log("kinda works")
+      const regData = {
+          id: id, name: name, number: number, description: desc, documents: documents, email: email
+      };
+      console.log(regData.id + "wow it worked");
+      this.http.post('http://localhost:3000/api/merchant/registerMerchant', regData)
+      .subscribe(response =>{
+        console.log(response),
+        error => {
+          console.error('Error:', error);
+        };
+      });
     }
 }

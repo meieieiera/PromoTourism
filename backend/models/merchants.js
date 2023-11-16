@@ -6,7 +6,7 @@ const documentSchema=mongoose.Schema({
     file:{type:Buffer,required:true}
 });
 const merchantSchema=mongoose.Schema({
-    id:{type:Number,required:true},
+    id:{type:String,required:true},
     name:{type:String,required:true},
     number:{type:String,required:true},
     description:{type:String,required:true},

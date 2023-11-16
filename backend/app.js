@@ -358,6 +358,7 @@ app.put('/api/updateAnalysis',(req,res,next)=>{
       });
   });
 
+  // register unapproved merchants
   app.post('/api/unapprovedMerchant', upload.array('documents'), (req, res, next) => {
     const mId = shortid.generate();
   
@@ -393,18 +394,26 @@ app.put('/api/updateAnalysis',(req,res,next)=>{
       });
   });
 
-
-//upload file 
- 
+//Remove Unapproved Merchants
+app.delete('/api/unapprovedMerchant/:id', (req, res, next) => {
+  UnapprovedMerchant.deleteOne({id: req.params.id}).then(result =>{
+    console.log(result);
+    res.status(200).json({
+      message: 'Merchant deleted successfully'
+    });
+  })
+})
 
 //Create Merchant Login 
-app.post('/api/registerMerchant',(req,res,next)=>{
+app.post('/api/merchant/registerMerchant',(req,res,next)=>{
   console.log("email from backend below")
   console.log(req.body.email);
-  const password = generator.generate({ 
+  /*const password = generator.generate({ 
     length: 10, 
     numbers: true
-}); 
+}); */
+ const password = '123';
+console.log(password);
   bcrypt.hash(password,10)
   .then(hash=>{
     const user = new User({
@@ -420,7 +429,7 @@ app.post('/api/registerMerchant',(req,res,next)=>{
   })
   .then(user=>{
     const merchant = new Merchant({
-      id: uniq,
+      id: req.body.id,
       name:req.body.name,
       number:req.body.number,
       description:req.body.description,
@@ -430,7 +439,8 @@ app.post('/api/registerMerchant',(req,res,next)=>{
       productsSold:0,
       revenue:0
     });
-    merchant.save().then(merchant=>{
+    console.log(merchant);
+    merchant.save().then(()=>{
       res.status(201).json({
         message:'Merchant registered'
       })

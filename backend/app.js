@@ -527,7 +527,7 @@ app.post('/api/addTour', upload.single('image'), (req, res) => {
 
   // Save the data to MongoDB
   const tourData = new Tour({
-    id: 1,
+    id: Math.floor(Math.random() * 100),
     name: req.body.name,
     quantity: req.body.quantity,
     description: req.body.description,

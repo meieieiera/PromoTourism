@@ -130,11 +130,35 @@ export class TourService {
   });
   }
 
+  /*
+  getTourByMerchantId(merchantId: string){
+    this.http.get<{message:string,tours:any}>('http:localhost:3000/api/toursByMerchant/' + merchantId)
+        .pipe(map((tourData)=>{
+            return tourData.tours.map(tour=>{
+                return{
+                  id: tour.id,
+                  name: tour.name,
+                  description: tour.description,
+                  price: tour.price,
+                  stars: tour.stars,
+                  imageUrl: tour.imageUrl,
+                  date: tour.date,
+                  pax: tour.pax,
+                  _id: tour._id
+                };
+            });
+        }))
+        .subscribe((transformedPosts)=>{
+            this.tours=transformedPosts;
+            this.toursByMIdUpdate.next([...this.tours]);
+        })
+  }*/
+  
 // Modify the getAll method to accept a merchantId parameter
 getTourByMerchantId(merchantId: string): Observable<Tour[]>{
 // Modify the getAll method to accept a merchantId parameter
   // Adjust the URL to include the merchantId
-  const url = `http://localhost:3000/api/tours?merchantId=${merchantId}`;
+  const url = 'http://localhost:3000/api/toursByMerchant/' + merchantId;
 
   return this.http.get<{ message: string, tours: any }>(url)
     .pipe(
@@ -160,6 +184,7 @@ getTourByMerchantId(merchantId: string): Observable<Tour[]>{
     );
 }
 
+
 getToursByMIdUpdateListener(){
   return this.toursByMIdUpdate.asObservable();
 }
@@ -183,14 +208,15 @@ updateTourProduct(tourData: any){
 
 
 
-addTour(name: string, quantity: number, price: number, description: string, formData: FormData){
+addTour(name: string, quantity: number, price: number, description: string, image: File, merchantId: string){
   console.log("kinda works")
         const regData: any = {
           name: name,
           description: description,
           quantity: quantity,
           price: price,
-          image: formData
+          image: File,
+          merchantId: merchantId
         };
         console.log(regData.contactNum + "wow it worked");
         this.http.post('http://localhost:3000/api/addTour', regData)

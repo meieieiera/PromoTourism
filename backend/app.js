@@ -224,9 +224,9 @@ app.put("/api/updateTour",(req,res,next)=>{
 
 //update tour object as merchant
 app.put("/api/updateTourProduct",(req,res,next)=>{
-  const tourId = req.body.tourId;
+  const tourId = req.body.id;
   const tourIdAsObjectId = new mongoose.Types.ObjectId(tourId);
-  Tour.findOne({_id:tourIdAsObjectId}).then((tour)=>{
+  Tour.findOne({id:tourId}).then((tour)=>{
     if (!tour) {
       // Handle the case when the tour is not found
       return res.status(404).json({
@@ -235,12 +235,10 @@ app.put("/api/updateTourProduct",(req,res,next)=>{
     }
 
     // Update the tour's rating and comments
-    tour.stars = rating;
-    tour.comments.push(newComments);
-    tour.name.push(req.body.name);
-    tour.description.push(req.body.description);
-    tour.price.push(req.body.price);
-    tour.quantity.push(req.body.quantity);
+    tour.name = req.body.name;
+    tour.description = req.body.description;
+    tour.price = req.body.price;
+    tour.quantity = req.body.quantity;
 
 
     // Save the updated tour
@@ -522,8 +520,6 @@ console.log(password);
 
 //Add Tour
 app.post('/api/addTour', upload.single('image'), (req, res) => {
-  // Get the filename of the uploaded image
-  const image = req.file.filename;
 
   // Save the data to MongoDB
   const tourData = new Tour({
@@ -534,20 +530,26 @@ app.post('/api/addTour', upload.single('image'), (req, res) => {
   quantity: req.body.quantity,
   price: req.body.price,
   stars: 0,
-  imageUrl: image,
+  imageUrl: 'uploads/image/'+ Date().toString().replace(/\s/g, ""),
   date: '12/12/2023',
   pax: 2,
   comments: '',
   merchantId: req.body.merchantId
   });
 
-  tourData.save((err) => {
-    if (err) {
-      console.error('Error saving data:', err);
-      res.status(500).send('Error saving data');
-    } else {
-      res.status(200).send('Tour saved successfully');
-    }
+  tourData.save()
+  .then((savedTour) => {
+    console.log('Merchant created below');
+    res.status(201).json({
+      message: 'Merchant registered',
+      createdTour: savedTour
+    });
+  })
+  .catch(error => {
+    console.error('Error registering merchant:', error);
+    res.status(500).json({
+      error: 'Internal Server Error',
+    });
   });
 });
 

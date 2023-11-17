@@ -368,6 +368,7 @@ app.post('/api/registerCustomer',(req,res,next)=>{
 
 //update analysis
 app.put('/api/updateAnalysis',(req,res,next)=>{
+  console.log("Update analysis method called")
   let price;
   const tourIdAsObjectId = new mongoose.Types.ObjectId(req.body.tourId);
   Tour.findOne({ _id: tourIdAsObjectId })
@@ -377,21 +378,21 @@ app.put('/api/updateAnalysis',(req,res,next)=>{
       return tour.save();
     })
     .then((updatedTour) => {
-      console.log("updated tour below");
+      console.log("updated tour below from update analysis");
       console.log(updatedTour);
       const merchantid=updatedTour.merchantId;
       const merchantIdAsObjectId = new mongoose.Types.ObjectId(merchantid);
       return Merchant.findOne({ _id: merchantIdAsObjectId });
     })
     .then((merchant) => {
-      console.log("merchant below")
+      console.log("merchant below from update analysis")
       console.log(merchant)
       merchant.revenue = merchant.revenue + price;
       merchant.productsSold = merchant.productsSold + 1;
       return merchant.save();
     })
     .then((updatedMerchant) => {
-      console.log("updated merchant below");
+      console.log("updated merchant below from update analysis");
       console.log(updatedMerchant);
       res.status(200).json({
         message: 'Analysis updated',

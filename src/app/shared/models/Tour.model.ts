@@ -9,5 +9,6 @@ export class Tour{
     date!:string;
     pax!:number;
     comments:string;
+    merchantId: string;
     _id:string;
 }

@@ -105,8 +105,8 @@ export class PendingApprovalComponent {
 
   onApproveMerchant(id: string, name: string, num: string, email: string, desc: string, documents: Document[]) {
     this.merchantService.addMerchant(id, name, num, email, desc, documents);
-    this.unapprovedMerchantService.deleteMerchant(id);
-    this.dialog.open(SaveDialog);
+    //this.unapprovedMerchantService.deleteMerchant(id);
+    //this.dialog.open(SaveDialog);
   }
 }
 

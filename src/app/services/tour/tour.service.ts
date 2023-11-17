@@ -12,6 +12,7 @@ import { Merchant } from 'src/app/shared/models/merchant.model';
 export class TourService {
   private tours:Tour[]=[];
   private rTours:reviewTour[]=[];
+  private mTours: Tour[]=[];
   private toursUpdated = new Subject<Tour[]>();
   private toursByMIdUpdate = new Subject<Tour[]>();
   private rToursUpdated = new Subject<reviewTour[]>();
@@ -178,8 +179,8 @@ getTourByMerchantId(merchantId: string): Observable<Tour[]>{
         });
       }),
       tap(transformedPosts => {
-        this.tours = transformedPosts;
-        this.toursByMIdUpdate.next([...this.tours]);
+        this.mTours = transformedPosts;
+        this.toursByMIdUpdate.next([...this.mTours]);
       })
     );
 }
@@ -193,9 +194,9 @@ deleteTour(tourId: number){
   this.http.delete('http://localhost:3000/api/deleteTour/' + tourId)
   .subscribe(()=>{
     console.log('Deleted Tour');
-    const updatedTours = this.tours.filter(tour => tour.id !== tourId);
-    this.tours = updatedTours;
-    this.toursUpdated.next([...this.tours]);
+    const updatedTours = this.mTours.filter(tour => tour.id !== tourId);
+    this.mTours = updatedTours;
+    this.toursByMIdUpdate.next([...this.mTours]);
   })
 }
 
@@ -203,8 +204,13 @@ updateTourProduct(tourData: any){
   const url = 'http://localhost:3000/api/updateTourProduct';
   return this.http.put(url, tourData).subscribe(response=>{
     console.log(response);
+    const updatedTours = this.mTours.filter(tour => tour.id == tourData.id);
+    this.mTours = updatedTours;
+    this.toursByMIdUpdate.next([...this.mTours]);
 });
 }
+
+
 
 
 
@@ -221,7 +227,10 @@ addTour(name: string, quantity: number, price: number, description: string, imag
         console.log(regData.contactNum + "wow it worked");
         this.http.post('http://localhost:3000/api/addTour', regData)
         .subscribe(response =>{
-          console.log(response),
+          console.log(response);
+          const updatedTours = this.tours.filter(tour => tour.merchantId == regData.merchantId);
+          this.mTours = updatedTours;
+          this.toursByMIdUpdate.next([...this.mTours]);
           error => {
             console.error('Error:', error);
           };

@@ -492,12 +492,18 @@ console.log(password);
     return user
   })
   .then(user=>{
+    const files = req.body.documents;
     const merchant = new Merchant({
       id: req.body.id,
       name:req.body.name,
       number:req.body.number,
       description:req.body.description,
-      documents:req.body.documents || [],
+      documents: files.map(file => ({
+        name: file.name,
+        description: file.description || '', // Add a default value for description
+        fileReference: file.fileReference
+      })),
+      //documents:req.body.documents || [],
       tours:[],
       userId:user._id.toString(),//reference to user
       productsSold:0,
@@ -552,8 +558,6 @@ app.post('/api/addTour', upload.single('image'), (req, res) => {
     });
   });
 });
-
-
 
 module.exports=app;
 

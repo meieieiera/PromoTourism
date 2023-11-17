@@ -131,29 +131,7 @@ export class TourService {
   });
   }
 
-  /*
-  getTourByMerchantId(merchantId: string){
-    this.http.get<{message:string,tours:any}>('http:localhost:3000/api/toursByMerchant/' + merchantId)
-        .pipe(map((tourData)=>{
-            return tourData.tours.map(tour=>{
-                return{
-                  id: tour.id,
-                  name: tour.name,
-                  description: tour.description,
-                  price: tour.price,
-                  stars: tour.stars,
-                  imageUrl: tour.imageUrl,
-                  date: tour.date,
-                  pax: tour.pax,
-                  _id: tour._id
-                };
-            });
-        }))
-        .subscribe((transformedPosts)=>{
-            this.tours=transformedPosts;
-            this.toursByMIdUpdate.next([...this.tours]);
-        })
-  }*/
+ 
   
 // Modify the getAll method to accept a merchantId parameter
 getTourByMerchantId(merchantId: string): Observable<Tour[]>{
@@ -204,14 +182,9 @@ updateTourProduct(tourData: any){
   const url = 'http://localhost:3000/api/updateTourProduct';
   return this.http.put(url, tourData).subscribe(response=>{
     console.log(response);
-    const updatedTours = this.mTours.filter(tour => tour.id == tourData.id);
-    this.mTours = updatedTours;
-    this.toursByMIdUpdate.next([...this.mTours]);
+    
 });
 }
-
-
-
 
 
 addTour(name: string, quantity: number, price: number, description: string, image: File, merchantId: string){
@@ -228,9 +201,6 @@ addTour(name: string, quantity: number, price: number, description: string, imag
         this.http.post('http://localhost:3000/api/addTour', regData)
         .subscribe(response =>{
           console.log(response);
-          const updatedTours = this.tours.filter(tour => tour.merchantId == regData.merchantId);
-          this.mTours = updatedTours;
-          this.toursByMIdUpdate.next([...this.mTours]);
           error => {
             console.error('Error:', error);
           };
@@ -272,5 +242,29 @@ addTour(name: string, quantity: number, price: number, description: string, imag
     //     this.toursUpdated.next([...this.tours]);
     //   });
     //   }
+
+     /*
+  getTourByMerchantId(merchantId: string){
+    this.http.get<{message:string,tours:any}>('http:localhost:3000/api/toursByMerchant/' + merchantId)
+        .pipe(map((tourData)=>{
+            return tourData.tours.map(tour=>{
+                return{
+                  id: tour.id,
+                  name: tour.name,
+                  description: tour.description,
+                  price: tour.price,
+                  stars: tour.stars,
+                  imageUrl: tour.imageUrl,
+                  date: tour.date,
+                  pax: tour.pax,
+                  _id: tour._id
+                };
+            });
+        }))
+        .subscribe((transformedPosts)=>{
+            this.tours=transformedPosts;
+            this.toursByMIdUpdate.next([...this.tours]);
+        })
+  }*/
 
   

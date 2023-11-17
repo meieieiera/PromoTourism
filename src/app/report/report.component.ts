@@ -52,11 +52,11 @@ export class ReportComponent implements OnInit{
       this.name = merchant.name;
       this.id = merchant.id;
       const purchasingPower = parseFloat((this.merchant.revenue / this.merchant.productsSold).toFixed(2));
-      this.chartSeries[0].data[10] = this.merchant.revenue;
+      this.chartSeries[0].data[10] = parseFloat(this.merchant.revenue.toFixed(2));
       this.chartSeries[1].data[10] = this.merchant.productsSold;
       this.chartSeries[2].data[10] = purchasingPower;
 
-      this.yearSeries[0].data[7] = this.merchant.revenue;
+      this.yearSeries[0].data[7] = parseFloat(this.merchant.revenue.toFixed(2));
       this.yearSeries[1].data[7] = this.merchant.productsSold;
       this.yearSeries[2].data[7] = purchasingPower;
     });

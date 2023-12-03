@@ -24,20 +24,6 @@ export class PurchaseComponent implements OnInit {
      
   }
 
-  // toPayment(form:NgForm){
-  //   if(form.invalid){
-  //     return;
-  //   }
-  //   const Detail:detail={
-  //     fname:form.value.fname,
-  //     lname:form.value.lname,
-  //     phone:form.value.phone,
-  //     email:form.value.email
-  //   };
-  //   // this.detailCreated.emit(Detail);
-  //   this.router.navigateByUrl(`payment/${this.tour.id}`);
-  // }
-
   toPayment(form: NgForm) {
     if (form.invalid) {
       return;

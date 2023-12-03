@@ -36,6 +36,7 @@ export class MerchantListComponent implements OnInit {
 
   ngOnInit(): void {
     this.merchantService.getAllMerchant();
+    //subscription listens for changes in the merchant data and updates
     this.merchantSub=this.merchantService.getMerchantsUpdateListener()
     .subscribe((merchants:Merchant[])=>{
       this.merchants=merchants.map((merchant)=>{

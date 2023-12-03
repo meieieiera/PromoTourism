@@ -92,8 +92,7 @@ export class TourService {
     return this.rToursUpdated.asObservable();
   }
   removeReviewTour(rTourId:string, custUserId:string){
-    // const tourId=rTourId;
-    // const customerId=custId;
+    
     const data = {
       tourId:rTourId,
       customerUserId:custUserId
@@ -101,9 +100,7 @@ export class TourService {
     
     this.http.put<{message:string}>('http://localhost:3000/api/removeRtour',data)
     .subscribe(()=>{
-        // const updatedRTours = this.rTours.filter(rTour=>rTour._id!==rTourId);
-        // this.rTours=updatedRTours;
-        // this.rToursUpdated.next([...this.rTours]);
+        
     });
     
 }

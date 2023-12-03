@@ -52,8 +52,6 @@ export class MerchantService {
             this.merchants=transformedMerchants;
             this.merchantsUpdated.next([...this.merchants]);
         })
-        console.log('merchants from service below')
-        console.log(this.merchants);
     }
     getMerchantsUpdateListener(){
       return this.merchantsUpdated.asObservable();

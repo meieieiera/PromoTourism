@@ -51,24 +51,18 @@ app.post("/api/rtours",(req,res,next)=>{
         });
       }
 
-      // Step 2: Retrieve the customer's existing list of tour IDs
+      //Retrieve the customer's existing list of tour IDs
       const existingTourIds = customer.reviewTours;
 
-      // Step 3: Add the new tourId to the list (if it's not already there)
+      //Add the new tourId to the list
       if (!existingTourIds.includes(tourId)) {
         existingTourIds.push(tourId);
       }
 
-      // Step 4: Update the customer document with the new list of tour IDs
+      //Update the customer with the new list of tour IDs
       customer.reviewTours = existingTourIds;
       return customer.save();
     })
-    // .then((updatedCustomer) => {
-    //   res.status(200).json({
-    //     message: 'Tour added successfully'
-    //     // customer: updatedCustomer
-    //   });
-    // })
     .catch((error) => {
       console.error('Error adding tour:', error);
       res.status(500).json({
@@ -97,7 +91,7 @@ app.get("/api/tours", (req, res, next) => {
 //get tour by merchant id
 app.get('/api/toursByMerchant/:merchantId', (req, res, next) => {
   const merchantId = req.params.merchantId;
-  Tour.find({ merchantId: merchantId }) // Assuming there's a field called merchantId in your Tour model
+  Tour.find({ merchantId: merchantId })
   .then((documents) => {
     res.status(200).json({
       message: 'Tours fetched successfully',
@@ -164,12 +158,12 @@ app.get("/api/rtours/:custId", (req, res, next) => {
 
       //Retrieve list of tour IDs from the customer's reviewTours
       const tourIdsToReview = customer.reviewTours;
+      //convert string id to object id
       const tourIdsAsObjectId = tourIdsToReview.map((tourId) => new mongoose.Types.ObjectId(tourId));
 
       //Find tours in the Tour collection based on the retrieved tour IDs
       Tour.find({ _id: { $in: tourIdsAsObjectId } })
         .then((tours) => {
-          // tours will contain an array of tour documents
           res.status(200).json({
             message: 'Review tours retrieved successfully',
             reviewTours: tours
@@ -271,8 +265,11 @@ app.put('/api/removeRtour',(req,res,next)=>{
     const tourId=req.body.tourId;
     const customerUserId=req.body.customerUserId;
     Customer.findOneAndUpdate(
+      // Find the customer by userId
       { userId: customerUserId },
+      // Remove the specified tourId from the reviewTours array
       { $pull: { reviewTours: tourId } },
+      // Return updated customer
       { new: true }
   )
   .then((customer) => {
@@ -307,9 +304,6 @@ app.post('/api/user/login',(req,res,next)=>{
       }
       fetchedUser=user
       return bcrypt.compare(req.body.password,user.password)
-      // if (!bcrypt.compare(req.body.password,user.password)){
-      //   return req.body.password===user.password
-      // }
   })
   .then(result=>{
       if(!result){
@@ -317,6 +311,8 @@ app.post('/api/user/login',(req,res,next)=>{
               message: 'Auth failed'
           });
       }
+      /* If the password is correct, generate a JWT (JSON Web Token) 
+      for authentication.*/
       const token=jwt.sign(
           {email:fetchedUser.email,userId:fetchedUser._id},
           'this_secret',
@@ -368,7 +364,7 @@ app.post('/api/registerCustomer',(req,res,next)=>{
 
 //update analysis
 app.put('/api/updateAnalysis',(req,res,next)=>{
-  console.log("Update analysis method called")
+  
   let price;
   const tourIdAsObjectId = new mongoose.Types.ObjectId(req.body.tourId);
   Tour.findOne({ _id: tourIdAsObjectId })
@@ -378,22 +374,19 @@ app.put('/api/updateAnalysis',(req,res,next)=>{
       return tour.save();
     })
     .then((updatedTour) => {
-      console.log("updated tour below from update analysis");
-      console.log(updatedTour);
+  
       const merchantid=updatedTour.merchantId;
       const merchantIdAsObjectId = new mongoose.Types.ObjectId(merchantid);
       return Merchant.findOne({ _id: merchantIdAsObjectId });
     })
     .then((merchant) => {
-      console.log("merchant below from update analysis")
-      console.log(merchant)
+     
       merchant.revenue = merchant.revenue + price;
       merchant.productsSold = merchant.productsSold + 1;
       return merchant.save();
     })
     .then((updatedMerchant) => {
-      console.log("updated merchant below from update analysis");
-      console.log(updatedMerchant);
+      
       res.status(200).json({
         message: 'Analysis updated',
       });

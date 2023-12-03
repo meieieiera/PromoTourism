@@ -80,11 +80,7 @@ export class PaymentComponent implements OnInit{
   }
 
   ngOnInit():void{
-    // this.userIdSubs=this.loginService
-    //     .userIdListener()
-    //     .subscribe((userid: string)=>{
-    //         this.userId=userid;
-    // });
+ 
     this.userId=this.loginService.getUserId();
     console.log(this.userId);
     console.log("user id above");
